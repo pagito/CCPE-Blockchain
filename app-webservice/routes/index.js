@@ -47,12 +47,12 @@ var g_cc;
 
     // Step 4 ==================================
         if(true){                //decide if I need to deploy or not
-            console.log("Ready, but do not deploy yet");
-            /*g_cc = cc;
+            //console.log("Ready, but do not deploy yet");
+            g_cc = cc;
             cc.deploy('init', ['99'], {delay_ms: 30000}, function(e){                       //delay_ms is milliseconds to wait after deploy for conatiner to start, 50sec recommended
                 console.log("success deployed");
                 cb_deployed();
-            });*/
+            });
         }
         else{
             g_cc = cc;
@@ -91,7 +91,8 @@ router.get('/transaction', function(req, res) {
 router.post('/getTransaction', function(req, res, next) {
 	console.log('savedata called');
     console.log(req.body);
-    //var id = req.body.Request_id;
+    
+    var id = req.body.Transaction_id;
     var userA = req.body.User_A;
     var userB = req.body.User_B;
     var sellerA = req.body.Seller_A;
@@ -100,7 +101,21 @@ router.post('/getTransaction', function(req, res, next) {
     var pointB = req.body.Ex_points_B;
     //console.log(req.body.User_A);
 
-	var responseObject =  { "message": "Transaction accepted",
+	var curret_date = new Date();
+    var dateStr = curret_date.getFullYear()+''+(curret_date.getMonth()+1)+''+curret_date.getDate();
+    var tmpID = sellerA+'-'+sellerB+'-'+dateStr+'-'+id;
+    g_cc.invoke.init_transaction([tmpID,userA,userB,sellerA,sellerB,pointA,pointB,''+Date.parse(new Date())],function(err, data) {
+
+        var succ_data = data;
+        res.json({
+            "msg":succ_data,
+            "respond":true,
+            "record_id":id
+        });
+        console.log('success',succ_data);
+    });
+
+    var responseObject =  { "message": "Transaction accepted",
 							"respond": true };
 	res.send(responseObject);
 });

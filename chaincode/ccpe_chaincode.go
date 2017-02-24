@@ -32,47 +32,36 @@ import (
 type SimpleChaincode struct {
 }
 
-var pointIndexStr = "_pointindex"				//name for the key/value that will store a list of all known pointss
-var transectionStr = "-tx"				//name for the key/value that will store all open trades
-var tmpRelatedPoint = "_tmpRelatedPoint"
-var tmpStr = "_tmpIndex"
+var pointIndexStr = "_pointindex"				//name for the key/value that will store a list of all known points
+var transectionStr = "_tx"				        //name for the key/value that will store all completed transactions
+//var tmpRelatedPoint = "_tmpRelatedPoint"
+//var tmpStr = "_tmpIndex"
 
-var minimalTxStr = "_minimaltx"
+//var minimalTxStr = "_minimaltx"
 
 type Point struct{
-	Id string `json:"id"`					//the fieldtags are needed to keep case from bouncing around
+	Id string `json:"id"`					   //the fieldtags are needed to keep case from bouncing around
 	Owner string `json:"owner"`
 	Amount int `json:"amount"`	
 }
 
 type Transaction struct{
-	Id string `json:"txID"`					//user who created the open trade order
-	Timestamp string `json:"EX_TIME"`			//utc timestamp of creation
-	TraderA string  `json:"USER_A_ID"`				//description of desired marble
-	TraderB string  `json:"USER_B_ID"`
-	SellerA string  `json:"SELLER_A_ID"`				//description of desired marble
-	SellerB string  `json:"SELLER_B_ID"`
-	PointA string  `json:"POINT_A"`
-	PointB string  `json:"POINT_B"`
-	Related []Point `json:"related"`		//array of points willing to trade away
+	Id string `json:"txID"`					   //Transaction ID from cppe system
+	Timestamp string `json:"ex_time"`		   //utc timestamp of creation
+	TraderA string  `json:"user_A_ID"`		   //UserA ID
+	TraderB string  `json:"user_B_ID"`         //UserB ID
+	SellerA string  `json:"seller_A_ID"`	   //UserA's Seller ID
+	SellerB string  `json:"seller_B_ID"`       //UserB's Seller ID
+	PointA string  `json:"point_A"`            //Points owned by UserA after exchange
+	PointB string  `json:"point_B"`            //Points owned by UserB after exchange
+	//Related []Point `json:"related"`		   //array of points willing to trade away
 }
 
-type Description struct{
-	Color string `json:"color"`
-	Size int `json:"size"`
-}
 
 type AllTx struct{
 	TXs []Transaction `json:"tx"`
 }
 
-/*type AnOpenTrade struct{
-	User string `json:"user"`					//user who created the open trade order
-	Timestamp int64 `json:"timestamp"`			//utc timestamp of creation
-	Want Description  `json:"want"`				//description of desired marble
-	Willing []Description `json:"willing"`		//array of marbles willing to trade away
-}
-*/
 
 // ============================================================================================================================
 // Main
@@ -114,15 +103,15 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string
 		return nil, err
 	}
 	
-	err = stub.PutState(tmpRelatedPoint, jsonAsBytes)
+	/*err = stub.PutState(tmpRelatedPoint, jsonAsBytes)
 	if err != nil {
 		return nil, err
-	}
+	}*/
 
-	err = stub.PutState(tmpStr, jsonAsBytes)
+/*	err = stub.PutState(tmpStr, jsonAsBytes)
 	if err != nil {
 		return nil, err
-	}
+	}*/
 
 
 	var trades AllTx
@@ -132,10 +121,10 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string
 		return nil, err
 	}
 
-	err = stub.PutState(minimalTxStr, jsonAsBytes)
+/*	err = stub.PutState(minimalTxStr, jsonAsBytes)
 	if err != nil {
 		return nil, err
-	}
+	}*/
 	
 	return nil, nil
 }
@@ -164,7 +153,7 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 	} else if function == "write" {											//writes a value to the chaincode state
 		return t.Write(stub, args)
 	} else if function == "init_point" {									//create a new marble
-		return t.init_marble(stub, args)
+		return t.init_point(stub, args)
 	} else if function == "set_user" {										//change owner of a marble
 		res, err := t.set_user(stub, args)
 		//cleanTrades(stub)													//lets make sure all open trades are still valid
@@ -287,9 +276,9 @@ func (t *SimpleChaincode) Write(stub shim.ChaincodeStubInterface, args []string)
 }
 
 // ============================================================================================================================
-// Init Marble - create a new marble, store into chaincode state
+// Init Point - create a new marble, store into chaincode state
 // ============================================================================================================================
-func (t *SimpleChaincode) init_marble(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
+func (t *SimpleChaincode) init_point(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
 	var err error
 
 	//   0       1       2     3
@@ -358,6 +347,62 @@ func (t *SimpleChaincode) init_marble(stub shim.ChaincodeStubInterface, args []s
 	return nil, nil
 }
 
+
+
+func (t *SimpleChaincode) init_transaction(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
+	var err error	
+	//	0        1      2     3      4      5       6
+	//["bob", "blue", "16", "red", "16"] *"blue", "35*
+
+	/*
+	Id string `json:"txID"`					//user who created the open trade order
+	Timestamp string `json:"EX_TIME"`			//utc timestamp of creation
+	TraderA string  `json:"USER_A_ID"`				//description of desired marble
+	TraderB string  `json:"USER_B_ID"`
+	SellerA string  `json:"SELLER_A_ID"`				//description of desired marble
+	SellerB string  `json:"SELLER_B_ID"`
+	PointA string  `json:"POINT_A"`
+	PointB string  `json:"POINT_B"`
+	Related []Point `json:"related"`
+}
+	*/
+
+
+	open := Transaction{}
+	open.Id = args[0]
+	open.TraderA = args[1]
+	open.TraderB = args[2]
+	open.SellerA = args[3]
+	open.SellerB = args[4]
+	open.PointA = args[5]
+	open.PointB = args[6]
+	open.Timestamp = args[7]
+	
+	fmt.Println("- start open trade")
+	jsonAsBytes, _ := json.Marshal(open)
+	err = stub.PutState("_debug1", jsonAsBytes)
+
+	//get the open trade struct
+	tradesAsBytes, err := stub.GetState(pointIndexStr)
+	if err != nil {
+		return nil, errors.New("Failed to get TXs")
+	}
+
+	var trades AllTx
+	json.Unmarshal(tradesAsBytes, &trades)										//un stringify it aka JSON.parse()
+	
+	trades.TXs = append(trades.TXs, open);						//append to open trades
+	fmt.Println("! appended open to trades")
+	jsonAsBytes, _ = json.Marshal(trades)
+	err = stub.PutState(pointIndexStr, jsonAsBytes)								//rewrite open orders
+	if err != nil {
+		return nil, err
+	}
+	fmt.Println("- end open trade")
+	return nil, nil
+}
+
+
 // ============================================================================================================================
 // Set User Permission on Marble
 // ============================================================================================================================
@@ -393,6 +438,7 @@ func (t *SimpleChaincode) set_user(stub shim.ChaincodeStubInterface, args []stri
 // ============================================================================================================================
 // Open Trade - create an open trade for a marble you want with marbles you have 
 // ============================================================================================================================
+/*
 func (t *SimpleChaincode) open_trade(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
 	var err error
 	var will_size int
@@ -530,11 +576,11 @@ func (t *SimpleChaincode) perform_trade(stub shim.ChaincodeStubInterface, args [
 	fmt.Println("- end close trade")
 	return nil, nil
 }
-
+*/
 // ============================================================================================================================
-// findMarble4Trade - look for a matching marble that this user owns and return it
+// findPointWithOwner - look for a matching marble that this user owns and return it
 // ============================================================================================================================
-func findMarble4Trade(stub shim.ChaincodeStubInterface, user string, color string, size int )(m Marble, err error){
+func findPointWithOwner(stub shim.ChaincodeStubInterface, user string, color string, size int )(m Marble, err error){
 	var fail Marble;
 	fmt.Println("- start find marble 4 trade")
 	fmt.Println("looking for " + user + ", " + color + ", " + strconv.Itoa(size));
@@ -580,6 +626,7 @@ func makeTimestamp() int64 {
 // ============================================================================================================================
 // Remove Open Trade - close an open trade
 // ============================================================================================================================
+/*
 func (t *SimpleChaincode) remove_trade(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
 	var err error
 	
@@ -688,3 +735,4 @@ func cleanTrades(stub shim.ChaincodeStubInterface)(err error){
 	fmt.Println("- end clean trades")
 	return nil
 }
+*/
