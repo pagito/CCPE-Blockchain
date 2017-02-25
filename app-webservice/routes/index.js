@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var g_cc;
+var my_cc;
 
  // Step 1 ================================== 
     var Ibc1 = require('ibm-blockchain-js');
@@ -46,19 +46,27 @@ var g_cc;
         //app2.setup(ibc, cc);
 
     // Step 4 ==================================
-        if(true){                //decide if I need to deploy or not
-            //console.log("Ready, but do not deploy yet");
-            g_cc = cc;
-            cc.deploy('init', ['99'], {delay_ms: 30000}, function(e){                       //delay_ms is milliseconds to wait after deploy for conatiner to start, 50sec recommended
-                console.log("success deployed");
+        if(err != null){
+            console.log('! looks like an error loading the chaincode or network, app will fail\n', err);
+            if(!process.error) process.error = {type: 'load', msg: err.details};                //if it already exist, keep the last error
+        } else {
+            
+            my_cc = cc;
+
+            if(!cc.details.deployed_name || cc.details.deployed_name === ''){                //decide if I need to deploy or not
+                //console.log("Ready, but do not deploy yet");
+                
+                cc.deploy('init', ['99'], {delay_ms: 30000}, function(e){                    //delay_ms is milliseconds to wait after deploy for conatiner to start, 50sec recommended
+                    console.log("success deployed");
+                    cb_deployed();
+                });
+            }
+            else{
+                //my_cc = cc;
+                console.log('chaincode summary file indicates chaincode has been previously deployed');
+             
                 cb_deployed();
-            });
-        }
-        else{
-            g_cc = cc;
-            console.log('chaincode summary file indicates chaincode has been previously deployed');
-         
-            cb_deployed();
+            }
         }
     }
 
@@ -104,7 +112,7 @@ router.post('/getTransaction', function(req, res, next) {
 	var curret_date = new Date();
     var dateStr = curret_date.getFullYear()+''+(curret_date.getMonth()+1)+''+curret_date.getDate();
     var tmpID = sellerA+'-'+sellerB+'-'+dateStr+'-'+id;
-    g_cc.invoke.init_transaction([tmpID,userA,userB,sellerA,sellerB,pointA,pointB,''+Date.parse(new Date())],function(err, data) {
+    my_cc.invoke.init_transaction([tmpID,userA,userB,sellerA,sellerB,pointA,pointB,''+Date.parse(new Date())],function(err, data) {
 
         var succ_data = data;
         res.json({
