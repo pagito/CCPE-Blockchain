@@ -398,7 +398,7 @@ func (t *SimpleChaincode) init_transaction(stub shim.ChaincodeStubInterface, arg
 	if err != nil {
 		return nil, err
 	}
-	fmt.Println("- end open trade")
+	fmt.Println("- end open trade ")
 	return nil, nil
 }
 
