@@ -31,9 +31,9 @@ var my_cc;
             }
         },
         chaincode:{
-            zip_url: 'https://github.com/pagito/CCPE-Blockchain/blob/master/chaincode/ccpe_chaincode.zip',
+            zip_url: 'https://github.com/CCPX-system/CCPX-blockchain/raw/master/GOLANG/ccpx/ccpx.zip',
             unzip_dir: '/',
-            git_url: 'https://github.com/pagito/CCPE-Blockchain/tree/master/chaincode'
+            git_url: 'https://github.com/CCPX-system/CCPX-blockchain/GOLANG/ccpx'
         }
     };
     
