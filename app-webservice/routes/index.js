@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
+var app = express();
+var http = require('http').Server(app);
+
 var my_cc;
 
  // Step 1 ================================== 
