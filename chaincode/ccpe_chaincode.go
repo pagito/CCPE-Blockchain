@@ -354,35 +354,23 @@ func (t *SimpleChaincode) init_transaction(stub shim.ChaincodeStubInterface, arg
 	//	0        1      2     3      4      5       6
 	//["bob", "blue", "16", "red", "16"] *"blue", "35*
 
-	/*
-	Id string `json:"txID"`					//user who created the open trade order
-	Timestamp string `json:"EX_TIME"`			//utc timestamp of creation
-	TraderA string  `json:"USER_A_ID"`				//description of desired marble
-	TraderB string  `json:"USER_B_ID"`
-	SellerA string  `json:"SELLER_A_ID"`				//description of desired marble
-	SellerB string  `json:"SELLER_B_ID"`
-	PointA string  `json:"POINT_A"`
-	PointB string  `json:"POINT_B"`
-	Related []Point `json:"related"`
-}
-	*/
 
 
-	open := Transaction{}
-	open.Id = args[0]
-	open.TraderA = args[1]
-	open.TraderB = args[2]
-	open.SellerA = args[3]
-	open.SellerB = args[4]
-	open.PointA = args[5]
-	open.PointB = args[6]
-	open.Timestamp = args[7]
+	completed := Transaction{}
+	completed.Id = args[0]
+	completed.TraderA = args[1]
+	completed.TraderB = args[2]
+	completed.SellerA = args[3]
+	completed.SellerB = args[4]
+	completed.PointA = args[5]
+	completed.PointB = args[6]
+	completed.Timestamp = args[7]
 	
-	fmt.Println("- start open trade")
-	jsonAsBytes, _ := json.Marshal(open)
+	fmt.Println("- start completed trade")
+	jsonAsBytes, _ := json.Marshal(completed)
 	err = stub.PutState("_debug1", jsonAsBytes)
 
-	//get the open trade struct
+	//get the completed trade struct
 	tradesAsBytes, err := stub.GetState(pointIndexStr)
 	if err != nil {
 		return nil, errors.New("Failed to get TXs")
@@ -391,14 +379,14 @@ func (t *SimpleChaincode) init_transaction(stub shim.ChaincodeStubInterface, arg
 	var trades AllTx
 	json.Unmarshal(tradesAsBytes, &trades)										//un stringify it aka JSON.parse()
 	
-	trades.TXs = append(trades.TXs, open);						//append to open trades
-	fmt.Println("! appended open to trades")
+	trades.TXs = append(trades.TXs, completed);						//append to completed trades
+	fmt.Println("! appended completed to trades")
 	jsonAsBytes, _ = json.Marshal(trades)
-	err = stub.PutState(pointIndexStr, jsonAsBytes)								//rewrite open orders
+	err = stub.PutState(pointIndexStr, jsonAsBytes)								//rewrite completed orders
 	if err != nil {
 		return nil, err
 	}
-	fmt.Println("- end open trade ")
+	fmt.Println("- end completed trade ")
 	return nil, nil
 }
 
