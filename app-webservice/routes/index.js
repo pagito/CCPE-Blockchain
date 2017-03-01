@@ -36,7 +36,7 @@ var my_cc;
         chaincode:{
             zip_url: 'https://github.com/pagito/CCPE-Blockchain/raw/master/chaincode/ccpe_chaincode.zip',
             unzip_dir: '/',
-            git_url: 'https://github.com/pagito/CCPE-Blockchain/tree/master/chaincode'
+            git_url: 'https://github.com/pagito/CCPE-Blockchain/chaincode'
         }
     };
     
