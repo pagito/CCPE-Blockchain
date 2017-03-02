@@ -154,7 +154,7 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 		return t.Write(stub, args)
 	} else if function == "init_point" {									//create a new marble
 		return t.init_point(stub, args)
-	} else if function == "set_user" {										//change owner of a marble
+	} /* else if function == "set_user" {										//change owner of a marble
 		res, err := t.set_user(stub, args)
 		//cleanTrades(stub)													//lets make sure all open trades are still valid
 		return res, err
@@ -165,7 +165,7 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 		return t.test(stub, args)
 	} else if function == "init_transaction" {									//create a new trade order
 		return t.init_transaction(stub, args)
-}
+    }*/
     /*
 	 else if function == "perform_trade" {									//forfill an open trade order
 		res, err := t.perform_trade(stub, args)
@@ -348,7 +348,7 @@ func (t *SimpleChaincode) init_point(stub shim.ChaincodeStubInterface, args []st
 }
 
 
-
+/*
 func (t *SimpleChaincode) init_transaction(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
 	var err error	
 	//	0        1      2     3      4      5       6
@@ -388,12 +388,13 @@ func (t *SimpleChaincode) init_transaction(stub shim.ChaincodeStubInterface, arg
 	}
 	fmt.Println("- end completed trade ")
 	return nil, nil
-}
+}*/
 
 
 // ============================================================================================================================
 // Set User Permission on Marble
 // ============================================================================================================================
+/*
 func (t *SimpleChaincode) set_user(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
 	var err error
 	
@@ -422,7 +423,7 @@ func (t *SimpleChaincode) set_user(stub shim.ChaincodeStubInterface, args []stri
 	fmt.Println("- end set user")
 	return nil, nil
 }
-
+*/
 // ============================================================================================================================
 // Open Trade - create an open trade for a marble you want with marbles you have 
 // ============================================================================================================================
@@ -568,7 +569,7 @@ func (t *SimpleChaincode) perform_trade(stub shim.ChaincodeStubInterface, args [
 // ============================================================================================================================
 // findPointWithOwner - look for a matching marble that this user owns and return it
 // ============================================================================================================================
-func findPointWithOwner(stub shim.ChaincodeStubInterface, user string, color string, size int )(m Marble, err error){
+/*func findPointWithOwner(stub shim.ChaincodeStubInterface, user string, color string, size int )(m Marble, err error){
 	var fail Marble;
 	fmt.Println("- start find marble 4 trade")
 	fmt.Println("looking for " + user + ", " + color + ", " + strconv.Itoa(size));
@@ -602,7 +603,7 @@ func findPointWithOwner(stub shim.ChaincodeStubInterface, user string, color str
 	
 	fmt.Println("- end find marble 4 trade - error")
 	return fail, errors.New("Did not find marble to use in this trade")
-}
+}*/
 
 // ============================================================================================================================
 // Make Timestamp - create a timestamp in ms
