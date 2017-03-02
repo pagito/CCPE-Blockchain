@@ -152,9 +152,9 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 		return res, err
 	} else if function == "write" {											//writes a value to the chaincode state
 		return t.Write(stub, args)
-	} else if function == "init_point" {									//create a new marble
+	} /*else if function == "init_point" {									//create a new marble
 		return t.init_point(stub, args)
-	} /* else if function == "set_user" {										//change owner of a marble
+	} *//* else if function == "set_user" {										//change owner of a marble
 		res, err := t.set_user(stub, args)
 		//cleanTrades(stub)													//lets make sure all open trades are still valid
 		return res, err
@@ -278,6 +278,7 @@ func (t *SimpleChaincode) Write(stub shim.ChaincodeStubInterface, args []string)
 // ============================================================================================================================
 // Init Point - create a new marble, store into chaincode state
 // ============================================================================================================================
+/*
 func (t *SimpleChaincode) init_point(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
 	var err error
 
@@ -346,7 +347,7 @@ func (t *SimpleChaincode) init_point(stub shim.ChaincodeStubInterface, args []st
 	fmt.Println("- end init marble")
 	return nil, nil
 }
-
+*/
 
 /*
 func (t *SimpleChaincode) init_transaction(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
