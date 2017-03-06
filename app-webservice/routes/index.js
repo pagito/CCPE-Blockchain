@@ -78,7 +78,7 @@ var my_cc;
     // Step 5 ==================================
     function cb_deployed(err){
         console.log('sdk has deployed code and waited');
-        chaincode.query.read(['a']);
+        chaincode.query.read(['hello_world']);
         /*http.listen(3000, function(){
           console.log('listening on *:3000');
           
