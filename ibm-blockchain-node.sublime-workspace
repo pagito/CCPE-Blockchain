@@ -285,19 +285,19 @@
 			}
 		},
 		{
-			"file": "app-webservice/routes/index.js",
+			"file": "app-webservice/Dockerfile",
 			"settings":
 			{
-				"buffer_size": 4462,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
+				"buffer_size": 274,
+				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "app-webservice/app.js",
+			"file": "app-webservice/routes/index.js",
 			"settings":
 			{
-				"buffer_size": 1455,
+				"buffer_size": 4622,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
@@ -305,7 +305,7 @@
 			"file": "chaincode/ccpe_chaincode.go",
 			"settings":
 			{
-				"buffer_size": 27132,
+				"buffer_size": 27163,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -516,6 +516,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"Query",
+			"run",
+			"consensus",
 			"deploy",
 			"http",
 			"my_cc",
@@ -575,7 +578,7 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -591,8 +594,8 @@
 						"selection":
 						[
 							[
-								675,
-								675
+								813,
+								817
 							]
 						],
 						"settings":
@@ -611,19 +614,50 @@
 				},
 				{
 					"buffer": 1,
-					"file": "app-webservice/routes/index.js",
-					"semi_transient": false,
+					"file": "app-webservice/Dockerfile",
+					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 4462,
+						"buffer_size": 274,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1286,
-								1286
+								251,
+								251
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/ShellScript/Shell-Unix-Generic.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app-webservice/routes/index.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4622,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2840,
+								2851
 							]
 						],
 						"settings":
@@ -635,44 +669,11 @@
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": -0.0,
-						"translation.y": 351.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "app-webservice/app.js",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 1455,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								321,
-								321
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 624.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -681,15 +682,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 27132,
+						"buffer_size": 27163,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5995,
-								5995
+								10643,
+								10643
 							]
 						],
 						"settings":
@@ -701,10 +702,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1842.0,
+						"translation.y": 3243.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
