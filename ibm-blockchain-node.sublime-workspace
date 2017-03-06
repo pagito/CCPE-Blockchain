@@ -305,7 +305,7 @@
 			"file": "chaincode/ccpe_chaincode.go",
 			"settings":
 			{
-				"buffer_size": 27163,
+				"buffer_size": 2454,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -625,8 +625,8 @@
 						"selection":
 						[
 							[
-								251,
-								251
+								238,
+								224
 							]
 						],
 						"settings":
@@ -656,8 +656,8 @@
 						"selection":
 						[
 							[
-								2840,
-								2851
+								4473,
+								4473
 							]
 						],
 						"settings":
@@ -670,7 +670,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 624.0,
+						"translation.y": 1216.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -682,15 +682,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 27163,
+						"buffer_size": 2454,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								10643,
-								10643
+								1525,
+								1547
 							]
 						],
 						"settings":
@@ -702,7 +702,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3243.0,
+						"translation.y": 273.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
