@@ -78,8 +78,11 @@ var my_cc;
     // Step 5 ==================================
     function cb_deployed(err){
         console.log('sdk has deployed code and waited');
-        chaincode.query.read(['dummy_query']);
-        http.listen(8080, function(){
+        my_cc.invoke.Init();
+        console.log('Init done');
+        my_cc.query.read(['dummy_query']);
+        console.log('Query done');
+        http.listen(8088, function(){
           console.log('listening on *:3000');
           
         });
