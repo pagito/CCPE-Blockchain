@@ -78,7 +78,7 @@ var my_cc;
     // Step 5 ==================================
     function cb_deployed(err){
         console.log('sdk has deployed code and waited');
-        my_cc.invoke.Init();
+        my_cc.invoke.Init("Forza Juve!");
         console.log('Init done');
         my_cc.query.read(['dummy_query']);
         console.log('Query done');
