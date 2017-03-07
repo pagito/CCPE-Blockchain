@@ -40,8 +40,13 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string
 		return nil, errors.New("Incorrect number of arguments. Expecting 1")
 	}
 
-	return nil, nil
-}
+	err := stub.PutState("hello_world", []byte(args[0]))
+    if err != nil {
+	        return nil, err
+	    }
+
+		return nil, nil
+	}
 
 // Invoke is our entry point to invoke a chaincode function
 func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {

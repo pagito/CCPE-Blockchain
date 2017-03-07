@@ -78,11 +78,11 @@ var my_cc;
     // Step 5 ==================================
     function cb_deployed(err){
         console.log('sdk has deployed code and waited');
-        chaincode.query.read(['hello_world']);
-        /*http.listen(3000, function(){
+        chaincode.query.read(['dummy_query']);
+        http.listen(8080, function(){
           console.log('listening on *:3000');
           
-        });*/
+        });
     }
 
 
