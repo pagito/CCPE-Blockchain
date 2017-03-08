@@ -26,4 +26,4 @@ docker network connect bridge apphyperledger_vp2_1
 docker network connect bridge apphyperledger_vp3_1
 
 #docker run -p 9999:3000 -d ccpe/ws
-docker run --name ccpe_node --net=bridge -p 9999:3000 ccpe/ws
+docker run --name ccpe_node --net=bridge -p 9999:8088 ccpe/ws
