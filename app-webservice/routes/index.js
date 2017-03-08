@@ -37,8 +37,8 @@ var my_cc;
             zip_url: 'https://github.com/pagito/CCPE-Blockchain/raw/master/chaincode/ccpe_chaincode.zip',
             unzip_dir: '/',
             git_url: 'https://github.com/pagito/CCPE-Blockchain/chaincode',
-            //deployed_name: null
-            deployed_name:'b891436d638d09a0a4dcd68aa093604e80b68bc5319e87e975f232446494a606d38ead37e958c77271aea36919567c50352e148c4a949fde217fb1c058a5fdec'
+            deployed_name: null
+            //deployed_name:'b891436d638d09a0a4dcd68aa093604e80b68bc5319e87e975f232446494a606d38ead37e958c77271aea36919567c50352e148c4a949fde217fb1c058a5fdec'
         }
     };
     
