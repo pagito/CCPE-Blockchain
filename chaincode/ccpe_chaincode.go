@@ -16,9 +16,9 @@ package main
 import (
 	"errors"
 	"fmt"
-	"strconv"
+	//"strconv"
 	"encoding/json"
-	"time"
+	//"time"
 	"strings"
 
 	"github.com/hyperledger/fabric/core/chaincode/shim"
@@ -136,7 +136,7 @@ func (t *SimpleChaincode) read(stub shim.ChaincodeStubInterface, args []string) 
 // ============================================================================================================================
 // Write - write variable into chaincode state
 // ============================================================================================================================
-func (t *SimpleChaincode) Write(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
+func (t *SimpleChaincode) write(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
 	var name, value string // Entities
 	var err error
 	fmt.Println("running write()")
