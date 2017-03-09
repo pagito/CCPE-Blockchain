@@ -1,8 +1,14 @@
 var express = require('express');
 var router = express.Router();
 
-//var app = express();
+var app = express();
+var http = require('http').Server(app);
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 var my_cc;
 
@@ -61,7 +67,7 @@ var my_cc;
             if(!cc.details.deployed_name || cc.details.deployed_name === ''){                //decide if I need to deploy or not
                 //console.log("Ready, but do not deploy yet");
                 
-                cc.deploy('init', ['99'], {delay_ms: 30000}, function(e){                    //delay_ms is milliseconds to wait after deploy for conatiner to start, 50sec recommended
+                cc.deploy('init', ['Forza Juve!'], {delay_ms: 30000}, function(e){                    //delay_ms is milliseconds to wait after deploy for conatiner to start, 50sec recommended
                     console.log("success deployed");
                     cb_deployed();
                 });
