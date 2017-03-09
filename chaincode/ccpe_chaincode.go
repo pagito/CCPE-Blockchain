@@ -16,12 +16,43 @@ package main
 import (
 	"errors"
 	"fmt"
+	"strconv"
+	"encoding/json"
+	"time"
+	"strings"
 
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 )
 
 // SimpleChaincode example simple Chaincode implementation
 type SimpleChaincode struct {
+}
+
+var pointIndexStr = "_pointindex"				//name for the key/value that will store a list of all known points
+var transectionStr = "_tx"				        //name for the key/value that will store all completed transactions
+
+
+type Point struct{
+	Id string `json:"id"`					   //the fieldtags are needed to keep case from bouncing around
+	Owner string `json:"owner"`
+	Amount int `json:"amount"`	
+}
+
+type Transaction struct{
+	Id string `json:"txID"`					   //Transaction ID from cppe system
+	Timestamp string `json:"ex_time"`		   //utc timestamp of creation
+	TraderA string  `json:"user_A_ID"`		   //UserA ID
+	TraderB string  `json:"user_B_ID"`         //UserB ID
+	SellerA string  `json:"seller_A_ID"`	   //UserA's Seller ID
+	SellerB string  `json:"seller_B_ID"`       //UserB's Seller ID
+	PointA string  `json:"point_A"`            //Points owned by UserA after exchange
+	PointB string  `json:"point_B"`            //Points owned by UserB after exchange
+	//Related []Point `json:"related"`		   //array of points willing to trade away
+}
+
+
+type AllTx struct{
+	TXs []Transaction `json:"tx"`
 }
 
 // ============================================================================================================================
@@ -55,7 +86,9 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 	// Handle different functions
 	if function == "init" {													//initialize the chaincode state, used as reset
 		return t.Init(stub, "init", args)
-	}
+	} else if function == "write" {
+        return t.write(stub, args)
+    }
 	fmt.Println("invoke did not find func: " + function)					//error
 
 	return nil, errors.New("Received unknown function invocation: " + function)
@@ -118,5 +151,48 @@ func (t *SimpleChaincode) Write(stub shim.ChaincodeStubInterface, args []string)
 	if err != nil {
 		return nil, err
 	}
+	return nil, nil
+}
+
+
+
+func (t *SimpleChaincode) init_transaction(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
+	var err error	
+	//	0        1      2     3      4      5       6
+	//["bob", "blue", "16", "red", "16"] *"blue", "35*
+
+
+
+	completed := Transaction{}
+	completed.Id = args[0]
+	completed.TraderA = args[1]
+	completed.TraderB = args[2]
+	completed.SellerA = args[3]
+	completed.SellerB = args[4]
+	completed.PointA = args[5]
+	completed.PointB = args[6]
+	completed.Timestamp = args[7]
+	
+	fmt.Println("- start completed trade")
+	jsonAsBytes, _ := json.Marshal(completed)
+	err = stub.PutState("_debug1", jsonAsBytes)
+
+	//get the completed trade struct
+	tradesAsBytes, err := stub.GetState(pointIndexStr)
+	if err != nil {
+		return nil, errors.New("Failed to get TXs")
+	}
+
+	var trades AllTx
+	json.Unmarshal(tradesAsBytes, &trades)										//un stringify it aka JSON.parse()
+	
+	trades.TXs = append(trades.TXs, completed);						//append to completed trades
+	fmt.Println("! appended completed to trades")
+	jsonAsBytes, _ = json.Marshal(trades)
+	err = stub.PutState(pointIndexStr, jsonAsBytes)								//rewrite completed orders
+	if err != nil {
+		return nil, err
+	}
+	fmt.Println("- end completed trade ")
 	return nil, nil
 }

@@ -95,6 +95,11 @@ var my_cc;
     }
 
 
+    ibc.chain_stats(function(e, stats){
+        console.log('got some stats', stats);
+    });
+
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
