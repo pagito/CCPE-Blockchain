@@ -1,14 +1,14 @@
 var express = require('express');
 var router = express.Router();
 
-var app = express();
+/*var app = express();
 var http = require('http').Server(app);
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
-});
+});*/
 
 var my_cc;
 
@@ -88,10 +88,10 @@ var my_cc;
         //console.log('Init done');
         //my_cc.query.read(['dummy_query']);
         //console.log('Query done');
-        http.listen(8088, function(){
-          console.log('listening on *:8088');
+        //http.listen(8088, function(){
+          console.log('listening on *:3000');
           
-        });
+        //});
     }
 
 
