@@ -131,6 +131,7 @@ router.post('/getTransaction', function(req, res, next) {
 	var curret_date = new Date();
     var dateStr = curret_date.getFullYear()+''+(curret_date.getMonth()+1)+''+curret_date.getDate();
     var tmpID = sellerA+'-'+sellerB+'-'+dateStr+'-'+id;
+    console.log("Generated id, tmpID = " + tmpID);
     my_cc.invoke.init_transaction([tmpID,userA,userB,sellerA,sellerB,pointA,pointB,''+Date.parse(new Date())],function(err, data) {
 
         var succ_data = data;
