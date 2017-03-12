@@ -62,18 +62,18 @@ var my_cc;
             if(!process.error) process.error = {type: 'load', msg: err.details};                //if it already exist, keep the last error
         } else {
             
-            my_cc = cc;
+            
 
             if(!cc.details.deployed_name || cc.details.deployed_name === ''){                //decide if I need to deploy or not
                 //console.log("Ready, but do not deploy yet");
-                
+                my_cc = cc;
                 cc.deploy('init', ['Forza Juve!'], {delay_ms: 30000}, function(e){                    //delay_ms is milliseconds to wait after deploy for conatiner to start, 50sec recommended
                     console.log("success deployed");
                     cb_deployed();
                 });
             }
             else{
-                //my_cc = cc;
+                my_cc = cc;
                 console.log('chaincode summary file indicates chaincode has been previously deployed');
              
                 cb_deployed();
