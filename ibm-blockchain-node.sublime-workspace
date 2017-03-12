@@ -297,19 +297,26 @@
 			"file": "app-webservice/routes/index.js",
 			"settings":
 			{
-				"buffer_size": 4814,
+				"buffer_size": 5123,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "/*\nCopyright IBM Corp 2016 All Rights Reserved.\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\t\t http://www.apache.org/licenses/LICENSE-2.0\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n*/\n\npackage main\n\nimport (\n\t\"errors\"\n\t\"fmt\"\n\n\t\"github.com/hyperledger/fabric/core/chaincode/shim\"\n)\n\n// SimpleChaincode example simple Chaincode implementation\ntype SimpleChaincode struct {\n}\n\n// ============================================================================================================================\n// Main\n// ============================================================================================================================\nfunc main() {\n\terr := shim.Start(new(SimpleChaincode))\n\tif err != nil {\n\t\tfmt.Printf(\"Error starting Simple chaincode: %s\", err)\n\t}\n}\n\n// Init resets all the things\nfunc (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {\n\tif len(args) != 1 {\n\t\treturn nil, errors.New(\"Incorrect number of arguments. Expecting 1\")\n\t}\n\n\terr := stub.PutState(\"hello_world\", []byte(args[0]))\n    if err != nil {\n\t        return nil, err\n\t    }\n\n\t\treturn nil, nil\n\t}\n\n// Invoke is our entry point to invoke a chaincode function\nfunc (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {\n\tfmt.Println(\"invoke is running \" + function)\n\n\t// Handle different functions\n\tif function == \"init\" {\t\t\t\t\t\t\t\t\t\t\t\t\t//initialize the chaincode state, used as reset\n\t\treturn t.Init(stub, \"init\", args)\n\t} else if function == \"write\" {\n        return t.write(stub, args)\n    }\n\tfmt.Println(\"invoke did not find func: \" + function)\t\t\t\t\t//error\n\n\treturn nil, errors.New(\"Received unknown function invocation: \" + function)\n}\n\n// Query is our entry point for queries\nfunc (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {\n\tfmt.Println(\"query is running \" + function)\n\n\t// Handle different functions\n\tif function == \"dummy_query\" {\t\t\t\t\t\t\t\t\t\t\t//read a variable\n\t\tfmt.Println(\"hi there \" + function)\t\t\t\t\t\t//error\n\t\treturn nil, nil;\n\t}\n\n\tif function == \"read\" {\t\t\t\t\t\t\t\t\t\t\t\t\t//read a variable\n\t\treturn t.read(stub, args)\n\t}\n\tfmt.Println(\"query did not find func: \" + function)\t\t\t\t\t\t//error\n\n\treturn nil, errors.New(\"Received unknown function query: \" + function)\n}\n\n// ============================================================================================================================\n// Read - read a variable from chaincode state\n// ============================================================================================================================\nfunc (t *SimpleChaincode) read(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {\n\tvar name, jsonResp string\n\tvar err error\n\n\tif len(args) != 1 {\n\t\treturn nil, errors.New(\"Incorrect number of arguments. Expecting name of the var to query\")\n\t}\n\n\tname = args[0]\n\tvalAsbytes, err := stub.GetState(name)\t\t\t\t\t\t\t\t\t//get the var from chaincode state\n\tif err != nil {\n\t\tjsonResp = \"{\\\"Error\\\":\\\"Failed to get state for \" + name + \"\\\"}\"\n\t\treturn nil, errors.New(jsonResp)\n\t}\n\n\treturn valAsbytes, nil\t\t\t\t\t\t\t\t\t\t\t\t\t//send it onward\n}\n\n// ============================================================================================================================\n// Write - write variable into chaincode state\n// ============================================================================================================================\nfunc (t *SimpleChaincode) Write(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {\n\tvar name, value string // Entities\n\tvar err error\n\tfmt.Println(\"running write()\")\n\n\tif len(args) != 2 {\n\t\treturn nil, errors.New(\"Incorrect number of arguments. Expecting 2. name of the variable and value to set\")\n\t}\n\n\tname = args[0]\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t//rename for funsies\n\tvalue = args[1]\n\terr = stub.PutState(name, []byte(value))\t\t\t\t\t\t\t\t//write the variable into the chaincode state\n\tif err != nil {\n\t\treturn nil, err\n\t}\n\treturn nil, nil\n}",
-			"file": "chaincode/ccpe_chaincode.go",
-			"file_size": 4455,
-			"file_write_time": 131333842718438900,
+			"file": "app-webservice/app.js",
 			"settings":
 			{
-				"buffer_size": 4405,
+				"buffer_size": 1455,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "chaincode/ccpe_chaincode.go",
+			"settings":
+			{
+				"buffer_size": 6755,
+				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
@@ -528,6 +535,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"();\n",
 			"my_cc",
 			"deploy",
 			"hello_world",
@@ -593,7 +601,7 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -609,8 +617,8 @@
 						"selection":
 						[
 							[
-								763,
-								763
+								825,
+								825
 							]
 						],
 						"settings":
@@ -624,7 +632,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
@@ -655,7 +663,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
@@ -664,15 +672,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4814,
+						"buffer_size": 5123,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2412,
-								2416
+								4417,
+								4417
 							]
 						],
 						"settings":
@@ -685,27 +693,60 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 336.0,
+						"translation.y": 1443.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "chaincode/ccpe_chaincode.go",
+					"file": "app-webservice/app.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4405,
+						"buffer_size": 1455,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1436,
-								1426
+								870,
+								870
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "chaincode/ccpe_chaincode.go",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6755,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5564,
+								5580
 							]
 						],
 						"settings":
@@ -717,14 +758,14 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 259.0,
+						"translation.y": 2011.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 5,
 					"file": "/C/Users/Gio/Desktop/ccpe_chaincode.go",
 					"semi_transient": false,
 					"settings":
@@ -736,8 +777,8 @@
 						"selection":
 						[
 							[
-								879,
-								879
+								10089,
+								10089
 							]
 						],
 						"settings":
@@ -749,10 +790,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 117.0,
+						"translation.y": 2997.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 5,
 					"type": "text"
 				}
 			]
