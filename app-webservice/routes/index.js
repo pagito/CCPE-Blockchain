@@ -126,13 +126,15 @@ router.post('/getTransaction', function(req, res, next) {
     var sellerB = req.body.Seller_B;    
     var pointA = req.body.Ex_points_A;
     var pointB = req.body.Ex_points_B;
+    var prev_trans_id_A = req.body.Prev_Transaction_ID_A;
+    var prev_trans_id_B = req.body.Prev_Transaction_ID_B;
     //console.log(req.body.User_A);
 
 	var curret_date = new Date();
     var dateStr = curret_date.getFullYear()+''+(curret_date.getMonth()+1)+''+curret_date.getDate();
     var tmpID = sellerA+'-'+sellerB+'-'+dateStr+'-'+id;
     console.log("Generated id, tmpID = " + tmpID);
-    my_cc.invoke.init_transaction([tmpID,userA,userB,sellerA,sellerB,pointA,pointB,''+Date.parse(new Date())],function(err, data) {
+    my_cc.invoke.init_transaction([tmpID,userA,userB,sellerA,sellerB,pointA,pointB, prev_trans_id_A, prev_trans_id_B, ''+Date.parse(new Date())],function(err, data) {
 
         var succ_data = data;
         res.json({
@@ -150,5 +152,14 @@ router.post('/getTransaction', function(req, res, next) {
     console.log('savedata called');
 });
 
+
+// Get Chain stats
+router.get('/chain_stats', function(req, res){
+    console.log('got stat request');
+    ibc.chain_stats(function(e, stats){
+        console.log('got some stats', stats);
+        res.json({"stat": stats});              
+    });
+});
 
 module.exports = router;

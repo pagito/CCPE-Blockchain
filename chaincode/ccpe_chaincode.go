@@ -31,6 +31,8 @@ type SimpleChaincode struct {
 var pointIndexStr = "_pointindex"				//name for the key/value that will store a list of all known points
 var transectionStr = "_tx"				        //name for the key/value that will store all completed transactions
 
+var testStr = "_testIndex"
+
 
 type Point struct{
 	Id string `json:"id"`					   //the fieldtags are needed to keep case from bouncing around
@@ -47,6 +49,8 @@ type Transaction struct{
 	SellerB string  `json:"seller_B_ID"`       //UserB's Seller ID
 	PointA string  `json:"point_A"`            //Points owned by UserA after exchange
 	PointB string  `json:"point_B"`            //Points owned by UserB after exchange
+	Prev_Transaction_id_A string `json:"prev_transaction_id_A"`
+	Prev_Transaction_id_B string `json:"prev_transaction_id_B"`
 	//Related []Point `json:"related"`		   //array of points willing to trade away
 }
 
@@ -67,11 +71,21 @@ func main() {
 
 // Init resets all the things
 func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
+	var Aval int
+	var err error    
+
 	if len(args) != 1 {
 		return nil, errors.New("Incorrect number of arguments. Expecting 1")
 	}
 
-	err := stub.PutState("hello_world", []byte(args[0]))
+	// Initialize the chaincode
+	Aval, err = strconv.Atoi(args[0])
+	if err != nil {
+		return nil, errors.New("Expecting integer value for asset holding")
+	}
+
+	// Write the state to the ledger
+	err := stub.PutState("abc", []byte(strconv.Itoa(Aval)))                                   //making a test var "abc"
     if err != nil {
 	        return nil, err
 	    }
@@ -101,14 +115,15 @@ func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function strin
 	fmt.Println("query is running " + function)
 
 	// Handle different functions
-	if function == "dummy_query" {											//read a variable
+	/*if function == "dummy_query" {											//read a variable
 		fmt.Println("hi there " + function)						//error
 		return nil, nil;
-	}
+	}*/
 
 	if function == "read" {													//read a variable
 		return t.read(stub, args)
 	}
+
 	fmt.Println("query did not find func: " + function)						//error
 
 	return nil, errors.New("Received unknown function query: " + function)
@@ -118,21 +133,23 @@ func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function strin
 // Read - read a variable from chaincode state
 // ============================================================================================================================
 func (t *SimpleChaincode) read(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
-	var name, jsonResp string
+	var queryfunc, jsonResp string
 	var err error
 
-	if len(args) != 1 {
+/*	if len(args) != 1 {
 		return nil, errors.New("Incorrect number of arguments. Expecting name of the var to query")
-	}
+	}*/
 
-	name = args[0]
-	valAsbytes, err := stub.GetState(name)									//get the var from chaincode state
-	if err != nil {
-		jsonResp = "{\"Error\":\"Failed to get state for " + name + "\"}"
-		return nil, errors.New(jsonResp)
-	}
+	queryfunc = args[0]
+	if fcn == "read" {
+		valAsbytes, err := stub.GetState(args[1])									//get the var from chaincode state
+		if err != nil {
+			jsonResp = "{\"Error\":\"Failed to get state for " + queryfunc + "\"}"
+			return nil, errors.New(jsonResp)
+		}
 
-	return valAsbytes, nil													//send it onward
+		return valAsbytes, nil
+	}													//send it onward
 }
 
 // ============================================================================================================================
@@ -173,7 +190,9 @@ func (t *SimpleChaincode) init_transaction(stub shim.ChaincodeStubInterface, arg
 	completed.SellerB = args[4]
 	completed.PointA = args[5]
 	completed.PointB = args[6]
-	completed.Timestamp = args[7]
+	completed.prev_Id_A = args[7]
+	completed.prev_Id_B = args[8]
+	completed.Timestamp = args[9]
 	
 	fmt.Println("- start completed trade")
 	jsonAsBytes, _ := json.Marshal(completed)
@@ -196,5 +215,30 @@ func (t *SimpleChaincode) init_transaction(stub shim.ChaincodeStubInterface, arg
 		return nil, err
 	}
 	fmt.Println("- end completed trade ")
+	return nil, nil
+}
+
+
+func (t *SimpleChaincode) test(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
+	var err error
+	
+	//   0       1
+	// "name", "bob"
+	if len(args) < 2 {
+		return nil, errors.New("Incorrect number of arguments. Expecting 2")
+	}
+	
+	fmt.Println("- start test fcn")
+	fmt.Println(args[0] + " - " + args[1])
+
+	//get the open trade struct
+	testAsBytes, err := stub.GetState(testStr)
+	if err != nil {
+		return nil, errors.New("Failed to get TXs")
+	}
+	var test []string
+
+	json.Unmarshal(testAsBytes, &test)	
+	
 	return nil, nil
 }
