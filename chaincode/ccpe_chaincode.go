@@ -29,7 +29,7 @@ type SimpleChaincode struct {
 }
 
 var pointIndexStr = "_pointindex"				//name for the key/value that will store a list of all known points
-var transectionStr = "_tx"				        //name for the key/value that will store all completed transactions
+var transactionStr = "_tx"				        //name for the key/value that will store all completed transactions
 
 var testStr = "_testIndex"
 
@@ -90,8 +90,27 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string
 	        return nil, err
 	    }
 
-		return nil, nil
+	var empty []string
+	jsonAsBytes, _ := json.Marshal(empty)								//marshal an emtpy array of strings to clear the index
+	err = stub.PutState(pointIndexStr, jsonAsBytes)
+	if err != nil {
+		return nil, err
 	}
+
+	err = stub.PutState(testStr, jsonAsBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	var trades AllTx
+	jsonAsBytes, _ = json.Marshal(trades)								//clear the open trade struct
+	err = stub.PutState(transactionStr, jsonAsBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	return nil, nil
+}
 
 // Invoke is our entry point to invoke a chaincode function
 func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
@@ -147,8 +166,9 @@ func (t *SimpleChaincode) read(stub shim.ChaincodeStubInterface, args []string) 
 			jsonResp = "{\"Error\":\"Failed to get state for " + queryfunc + "\"}"
 			return nil, errors.New(jsonResp)
 		}		
-	}	
-	return valAsbytes, nil												//send it onward
+		return valAsbytes, nil
+	}
+	return nil, err													//send it onward
 }
 
 // ============================================================================================================================
@@ -189,8 +209,8 @@ func (t *SimpleChaincode) init_transaction(stub shim.ChaincodeStubInterface, arg
 	completed.SellerB = args[4]
 	completed.PointA = args[5]
 	completed.PointB = args[6]
-	completed.prev_Id_A = args[7]
-	completed.prev_trans_id_B = args[8]
+	completed.Prev_Transaction_ID_A = args[7]
+	completed.Prev_Transaction_ID_B = args[8]
 	completed.Timestamp = args[9]
 	
 	fmt.Println("- start completed trade")
