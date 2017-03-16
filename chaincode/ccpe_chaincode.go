@@ -16,7 +16,7 @@ package main
 import (
 	"errors"
 	"fmt"
-	//"strconv"
+	"strconv"
 	"encoding/json"
 	//"time"
 	//"strings"
@@ -141,15 +141,14 @@ func (t *SimpleChaincode) read(stub shim.ChaincodeStubInterface, args []string) 
 	}*/
 
 	queryfunc = args[0]
-	if fcn == "read" {
+	if queryfunc == "read" {
 		valAsbytes, err := stub.GetState(args[1])									//get the var from chaincode state
 		if err != nil {
 			jsonResp = "{\"Error\":\"Failed to get state for " + queryfunc + "\"}"
 			return nil, errors.New(jsonResp)
-		}
-
-		return valAsbytes, nil
-	}													//send it onward
+		}		
+	}	
+	return valAsbytes, nil												//send it onward
 }
 
 // ============================================================================================================================
@@ -191,7 +190,7 @@ func (t *SimpleChaincode) init_transaction(stub shim.ChaincodeStubInterface, arg
 	completed.PointA = args[5]
 	completed.PointB = args[6]
 	completed.prev_Id_A = args[7]
-	completed.prev_Id_B = args[8]
+	completed.prev_trans_id_B = args[8]
 	completed.Timestamp = args[9]
 	
 	fmt.Println("- start completed trade")
