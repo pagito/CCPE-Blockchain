@@ -85,7 +85,7 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string
 	}
 
 	// Write the state to the ledger
-	err := stub.PutState("abb", []byte(strconv.Itoa(Aval)))                                   //making a test var "abc"
+	err := stub.PutState("abc", []byte(strconv.Itoa(Aval)))                                   //making a test var "abc"
     if err != nil {
 	        return nil, err
 	    }
@@ -209,8 +209,8 @@ func (t *SimpleChaincode) init_transaction(stub shim.ChaincodeStubInterface, arg
 	completed.SellerB = args[4]
 	completed.PointA = args[5]
 	completed.PointB = args[6]
-	completed.Prev_Transaction_ID_A = args[7]
-	completed.Prev_Transaction_ID_B = args[8]
+	completed.Prev_Transaction_id_A = args[7]
+	completed.Prev_Transaction_id_B = args[8]
 	completed.Timestamp = args[9]
 	
 	fmt.Println("- start completed trade")
