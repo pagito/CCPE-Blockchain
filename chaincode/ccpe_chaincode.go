@@ -85,10 +85,10 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string
 	}
 
 	// Write the state to the ledger
-	err := stub.PutState("abc", []byte(strconv.Itoa(Aval)))                                   //making a test var "abc"
+	err = stub.PutState("abc", []byte(strconv.Itoa(Aval)))                                   //making a test var "abc"
     if err != nil {
 	        return nil, err
-	    }
+	}
 
 	var empty []string
 	jsonAsBytes, _ := json.Marshal(empty)								//marshal an emtpy array of strings to clear the index
