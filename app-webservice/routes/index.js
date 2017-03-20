@@ -133,8 +133,9 @@ router.post('/getTransaction', function(req, res, next) {
 	var curret_date = new Date();
     var dateStr = curret_date.getFullYear()+''+(curret_date.getMonth()+1)+''+curret_date.getDate();
     var tmpID = sellerA+'-'+sellerB+'-'+dateStr+'-'+id;
-    console.log("Generated id, tmpID = " + tmpID);
-    my_cc.invoke.init_transaction([tmpID,userA,userB,sellerA,sellerB,pointA,pointB, prev_trans_id_A, prev_trans_id_B, ''+Date.parse(new Date())],function(err, data) {
+    console.log("Generated id / tmpID / not used = " + tmpID);
+    console.log("Orer id" + id);
+    my_cc.invoke.init_transaction([id,userA,userB,sellerA,sellerB,pointA,pointB, prev_trans_id_A, prev_trans_id_B, ''+Date.parse(new Date())],function(err, data) {
 
         var succ_data = data;
         res.json({
@@ -145,9 +146,9 @@ router.post('/getTransaction', function(req, res, next) {
         console.log('success',succ_data);
     });
 
-    var responseObject =  { "message": "Transaction accepted",
-							"respond": true };
-	res.send(responseObject);
+    //var responseObject =  { "message": "Transaction accepted",
+							//"respond": true };
+	//res.send(responseObject);
 
     console.log('savedata called');
 });
