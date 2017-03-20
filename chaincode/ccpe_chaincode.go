@@ -199,15 +199,16 @@ func (t *SimpleChaincode) init_transaction(stub shim.ChaincodeStubInterface, arg
 
 	completed := Transaction{}
 	completed.Id = args[0]
-	completed.TraderA = args[1]
-	completed.TraderB = args[2]
-	completed.SellerA = args[3]
-	completed.SellerB = args[4]
-	completed.PointA = args[5]
-	completed.PointB = args[6]
-	completed.Prev_Transaction_id_A = args[7]
-	completed.Prev_Transaction_id_B = args[8]
-	completed.Timestamp = args[9]
+	completed.Timestamp = args[1]
+	completed.TraderA = args[2]
+	completed.TraderB = args[3]
+	completed.SellerA = args[4]
+	completed.SellerB = args[5]
+	completed.PointA = args[6]
+	completed.PointB = args[7]
+	completed.Prev_Transaction_id_A = args[8]
+	completed.Prev_Transaction_id_B = args[9]
+	
 	
 	fmt.Println("- start completed trade")
 	jsonAsBytes, _ := json.Marshal(completed)

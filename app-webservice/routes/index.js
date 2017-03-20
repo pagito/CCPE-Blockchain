@@ -67,7 +67,7 @@ var my_cc;
             if(!cc.details.deployed_name || cc.details.deployed_name === ''){                //decide if I need to deploy or not
                 //console.log("Ready, but do not deploy yet");
                 my_cc = cc;
-                cc.deploy('init', ['777'], {delay_ms: 30000}, function(e){                    //delay_ms is milliseconds to wait after deploy for conatiner to start, 50sec recommended
+                cc.deploy('init', ['aabbcc'], {delay_ms: 30000}, function(e){                    //delay_ms is milliseconds to wait after deploy for conatiner to start, 50sec recommended
                     console.log("success deployed");
                     cb_deployed();
                 });
@@ -133,8 +133,8 @@ router.post('/getTransaction', function(req, res, next) {
 	var curret_date = new Date();
     var dateStr = curret_date.getFullYear()+''+(curret_date.getMonth()+1)+''+curret_date.getDate();
     var tmpID = sellerA+'-'+sellerB+'-'+dateStr+'-'+id;
-    console.log("Generated id / tmpID / not used = " + tmpID);
-    console.log("Orer id" + id);
+    console.log("Generated id / tmpID / not used :" + tmpID);
+    console.log("Order id: " + id);
     my_cc.invoke.init_transaction([id,userA,userB,sellerA,sellerB,pointA,pointB, prev_trans_id_A, prev_trans_id_B, ''+Date.parse(new Date())],function(err, data) {
 
         var succ_data = data;
@@ -161,6 +161,6 @@ router.get('/chain_stats', function(req, res){
         console.log('got some stats', stats);
         res.json({"stat": stats});              
     });
-});
+});get
 
 module.exports = router;
