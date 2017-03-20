@@ -161,6 +161,6 @@ router.get('/chain_stats', function(req, res){
         console.log('got some stats', stats);
         res.json({"stat": stats});              
     });
-});get
+});
 
 module.exports = router;
