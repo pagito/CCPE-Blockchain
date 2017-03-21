@@ -167,9 +167,9 @@ router.get('/chain_stats', function(req, res){
 
 
 // Query Points
-app.get('/query_point', function(req, res){
+router.get('/query_point', function(req, res){
     console.log('got read request');
-    g_cc.query.read(['read','_pointindex'],function(err,resp){
+    my_cc.query.read(['read','_pointindex'],function(err,resp){
         if(!err){
             //var ss = resp.result.message;
             res.json(JSON.parse(resp));
