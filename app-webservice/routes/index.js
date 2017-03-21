@@ -44,7 +44,7 @@ var my_cc;
             unzip_dir: '/',
             git_url: 'https://github.com/pagito/CCPE-Blockchain/chaincode',
             deployed_name: null
-            //deployed_name:'b891436d638d09a0a4dcd68aa093604e80b68bc5319e87e975f232446494a606d38ead37e958c77271aea36919567c50352e148c4a949fde217fb1c058a5fdec'
+            //deployed_name:'bfe3ab73dc0ee80d7392dedd8cd13f7995b9d68e77d0c0aad1dcb3d49af330483e57368d29fded6e8aad5317dd6fd82ee81add9aca9899b7401dc1f968d4f337'
         }
     };
     
@@ -67,7 +67,7 @@ var my_cc;
             if(!cc.details.deployed_name || cc.details.deployed_name === ''){                //decide if I need to deploy or not
                 //console.log("Ready, but do not deploy yet");
                 my_cc = cc;
-                cc.deploy('init', ['aabbcc'], {delay_ms: 30000}, function(e){                    //delay_ms is milliseconds to wait after deploy for conatiner to start, 50sec recommended
+                cc.deploy('init', ['aabbcc'], {delay_ms: 90000}, function(e){                    //delay_ms is milliseconds to wait after deploy for conatiner to start, 50sec recommended
                     console.log("success deployed");
                     cb_deployed();
                 });

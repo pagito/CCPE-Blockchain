@@ -193,7 +193,7 @@ func (t *SimpleChaincode) write(stub shim.ChaincodeStubInterface, args []string)
 func (t *SimpleChaincode) init_transaction(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
 	var err error	
 	//	0        1      2     3      4      5       6
-	//["bob", "blue", "16", "red", "16"] *"blue", "35*
+	//["000009", "claudio", "alex", "Taobao", "TMall", "500", "600", "4453", "4456", "22/3/2017 2:34:12"] *"blue", "35*
 
 
 
