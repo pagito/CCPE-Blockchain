@@ -297,7 +297,7 @@
 			"file": "app-webservice/routes/index.js",
 			"settings":
 			{
-				"buffer_size": 5572,
+				"buffer_size": 5619,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -306,7 +306,7 @@
 			"file": "chaincode/ccpe_chaincode.go",
 			"settings":
 			{
-				"buffer_size": 8316,
+				"buffer_size": 8317,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -627,7 +627,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
@@ -658,7 +658,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -667,15 +667,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5572,
+						"buffer_size": 5619,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4997,
-								5000
+								809,
+								809
 							]
 						],
 						"settings":
@@ -688,7 +688,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1740.0,
+						"translation.y": 1597.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -700,15 +700,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8316,
+						"buffer_size": 8317,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7636,
-								7647
+								7366,
+								7379
 							]
 						],
 						"settings":
@@ -720,10 +720,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2352.0,
+						"translation.y": 2628.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -755,7 +755,7 @@
 						"translation.y": 1827.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 3,
 					"type": "text"
 				}
 			]

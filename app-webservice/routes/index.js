@@ -132,10 +132,12 @@ router.post('/getTransaction', function(req, res, next) {
 
 	var curret_date = new Date();
     var dateStr = curret_date.getFullYear()+''+(curret_date.getMonth()+1)+''+curret_date.getDate();
+    console.log("date1: " dateStr);
+    console.log("date2: " Date.parse(new Date()));
     var tmpID = sellerA+'-'+sellerB+'-'+dateStr+'-'+id;
     console.log("Generated id / tmpID / not used :" + tmpID);
     console.log("Order id: " + id);
-    my_cc.invoke.init_transaction([id,userA,userB,sellerA,sellerB,pointA,pointB, prev_trans_id_A, prev_trans_id_B, ''+Date.parse(new Date())],function(err, data) {
+    my_cc.invoke.init_transaction([id,userA,userB,sellerA,sellerB,pointA,pointB, prev_trans_id_A, prev_trans_id_B, dateStr],function(err, data) {
 
         var succ_data = data;
         res.json({
@@ -160,6 +162,36 @@ router.get('/chain_stats', function(req, res){
     ibc.chain_stats(function(e, stats){
         console.log('got some stats', stats);
         res.json({"stat": stats});              
+    });
+});
+
+
+// Query Points
+app.get('/query_point', function(req, res){
+    console.log('got read request');
+    g_cc.query.read(['read','_pointindex'],function(err,resp){
+        if(!err){
+            //var ss = resp.result.message;
+            res.json(JSON.parse(resp));
+            console.log('success',resp);  
+        }else{
+            console.log('fail');
+        }
+    });
+});
+
+
+// Init Point
+app.post('/init_point', function(req, res){
+    var seller = req.body.seller;
+    var owner = req.body.owner;
+    var curret_date = new Date();
+    var dateStr = curret_date.getFullYear()+''+curret_date.getMonth()+''+curret_date.getDate();
+    console.log('got init_marble request');
+    g_cc.invoke.init_point([seller+'-'+dateStr+'-',owner],function(err,resp){
+        var ss = resp;
+        res.json({"msg":ss});
+        console.log('success',ss);  
     });
 });
 
