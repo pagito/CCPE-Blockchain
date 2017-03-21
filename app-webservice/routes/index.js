@@ -132,8 +132,8 @@ router.post('/getTransaction', function(req, res, next) {
 
 	var curret_date = new Date();
     var dateStr = curret_date.getFullYear()+''+(curret_date.getMonth()+1)+''+curret_date.getDate();
-    console.log("date1: " dateStr);
-    console.log("date2: " Date.parse(new Date()));
+    console.log("date1: " + dateStr);
+    console.log("date2: " + Date.parse(new Date()));
     var tmpID = sellerA+'-'+sellerB+'-'+dateStr+'-'+id;
     console.log("Generated id / tmpID / not used :" + tmpID);
     console.log("Order id: " + id);
