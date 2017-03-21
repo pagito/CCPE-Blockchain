@@ -159,7 +159,7 @@ func (t *SimpleChaincode) read(stub shim.ChaincodeStubInterface, args []string) 
 	if queryfunc == "read" {
 		valAsbytes, err := stub.GetState(args[1])									//get the var from chaincode state
 		if err != nil {
-			jsonResp = "{\"Error\":\"Failed to get state for " + queryfunc + "\"}"
+			jsonResp = "{\"Error\":\"Failed to get state for " + args[1] + "\"}"
 			return nil, errors.New(jsonResp)
 		}		
 		return valAsbytes, nil
