@@ -181,8 +181,9 @@ router.get('/query_point', function(req, res){
 });
 
 
+/*
 // Init Point
-app.post('/init_point', function(req, res){
+router.post('/init_point', function(req, res){
     var seller = req.body.seller;
     var owner = req.body.owner;
     var curret_date = new Date();
@@ -194,5 +195,6 @@ app.post('/init_point', function(req, res){
         console.log('success',ss);  
     });
 });
+*/
 
 module.exports = router;
