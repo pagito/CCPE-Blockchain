@@ -150,10 +150,11 @@ router.post('/getTransaction', function(req, res, next) {
             "record_id":id
         });
 
-        var responseObject = { "message": succ_data }
-        res.send(responseObject);
+        //var responseObject = { "message": succ_data }
+        //res.send(responseObject);
 
-        console.log('success',succ_data);
+        console.log('Returned data success',succ_data);
+        console.log(succ_data);
     });
 
     //var responseObject =  { "message": "Transaction accepted",
