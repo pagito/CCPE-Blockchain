@@ -122,9 +122,10 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 		return t.Init(stub, "init", args)
 	} else if function == "write" {
         return t.write(stub, args)
-    } else if function == "init_transaction" {
+    }/* else if function == "init_transaction" {
         return t.init_transaction(stub, args)
-    }/* else if function == "test"{
+    }*/
+    /* else if function == "test"{
 		return t.test(stub, args)
 	}*/
 	fmt.Println("invoke did not find func: " + function)					//error
@@ -191,8 +192,8 @@ func (t *SimpleChaincode) write(stub shim.ChaincodeStubInterface, args []string)
 	return nil, nil
 }
 
-
-
+ 
+/*
 func (t *SimpleChaincode) init_transaction(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
 	var err error	
 	//	0        1      2     3      4      5       6
@@ -234,7 +235,7 @@ func (t *SimpleChaincode) init_transaction(stub shim.ChaincodeStubInterface, arg
 	}
 	fmt.Println("- end completed trade ")
 	return nil, nil
-}
+}*/
 
 /*
 func (t *SimpleChaincode) test(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
