@@ -6,10 +6,12 @@
 #docker rmi -f $(docker images -q)
 
 
-cd app-hyperledger
-. setenv.sh
+#cd app-hyperledger
+#. setenv.sh
+
 #docker-compose -f single-peer-ca.yaml up -d
-docker-compose -f four-peer-ca.yaml up -d
+
+#docker-compose -f four-peer-ca.yaml up -d
 
 cd ../app-webservice
 #cd app-webservice
