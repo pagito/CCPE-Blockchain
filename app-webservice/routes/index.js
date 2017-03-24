@@ -67,7 +67,7 @@ var my_cc;
             if(!cc.details.deployed_name || cc.details.deployed_name === ''){                //decide if I need to deploy or not
                 //console.log("Ready, but do not deploy yet");
                 my_cc = cc;
-                cc.deploy('init', ['aabbcc'], {save_path: './cc_summaries', delay_ms: 90000}, function(e){                    //delay_ms is milliseconds to wait after deploy for conatiner to start, 50sec recommended
+                cc.deploy('init', ['Forza Juve'], {save_path: './cc_summaries', delay_ms: 90000}, function(e){                    //delay_ms is milliseconds to wait after deploy for conatiner to start, 50sec recommended
                     console.log("success deployed");
                     cb_deployed();
                 });
@@ -175,7 +175,7 @@ router.get('/chain_stats', function(req, res){
     });
 });
 
-
+/*
 // Query Points
 router.get('/query_point', function(req, res){
     console.log('got read request');
@@ -189,7 +189,7 @@ router.get('/query_point', function(req, res){
         }
     });
 });
-
+*/
 
 // TEST
 router.post('/testPost',function(req,res){
