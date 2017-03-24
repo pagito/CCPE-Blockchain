@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"fcn",
+				"fcn"
+			],
+			[
 				"com",
 				"completed"
 			],
@@ -285,6 +289,14 @@
 			}
 		},
 		{
+			"file": "app-hyperledger/four-peer-ca.yaml",
+			"settings":
+			{
+				"buffer_size": 1954,
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "app-webservice/Dockerfile",
 			"settings":
 			{
@@ -297,7 +309,7 @@
 			"file": "app-webservice/routes/index.js",
 			"settings":
 			{
-				"buffer_size": 6736,
+				"buffer_size": 7039,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -306,7 +318,7 @@
 			"file": "chaincode/ccpe_chaincode.go",
 			"settings":
 			{
-				"buffer_size": 8380,
+				"buffer_size": 8435,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -586,7 +598,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 4,
 			"sheets":
 			[
 				{
@@ -602,8 +614,72 @@
 						"selection":
 						[
 							[
-								825,
-								825
+								650,
+								650
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/ShellScript/Shell-Unix-Generic.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "app-hyperledger/four-peer-ca.yaml",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 1954,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/YAML/YAML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app-webservice/Dockerfile",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 274,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								164,
+								178
 							]
 						],
 						"settings":
@@ -621,51 +697,20 @@
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "app-webservice/Dockerfile",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 274,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								164,
-								179
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/ShellScript/Shell-Unix-Generic.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
+					"buffer": 3,
 					"file": "app-webservice/routes/index.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6736,
+						"buffer_size": 7039,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3803,
-								3668
+								6510,
+								6510
 							]
 						],
 						"settings":
@@ -678,27 +723,27 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 598.0,
+						"translation.y": 2184.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 4,
 					"file": "chaincode/ccpe_chaincode.go",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8380,
+						"buffer_size": 8435,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6728,
-								6728
+								3542,
+								3542
 							]
 						],
 						"settings":
@@ -710,10 +755,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2408.0,
+						"translation.y": 1306.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]

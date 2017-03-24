@@ -97,10 +97,11 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string
 		return nil, err
 	}
 
+	/*
 	err = stub.PutState(testStr, jsonAsBytes)
 	if err != nil {
 		return nil, err
-	}
+	}*/
 
 	var trades AllTx
 	jsonAsBytes, _ = json.Marshal(trades)								//clear the open trade struct
@@ -123,7 +124,9 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
         return t.write(stub, args)
     } else if function == "init_transaction" {
         return t.init_transaction(stub, args)
-    }
+    }/* else if function == "test"{
+		return t.test(stub, args)
+	}*/
 	fmt.Println("invoke did not find func: " + function)					//error
 
 	return nil, errors.New("Received unknown function invocation: " + function)
@@ -233,7 +236,7 @@ func (t *SimpleChaincode) init_transaction(stub shim.ChaincodeStubInterface, arg
 	return nil, nil
 }
 
-
+/*
 func (t *SimpleChaincode) test(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
 	var err error
 	
@@ -256,4 +259,4 @@ func (t *SimpleChaincode) test(stub shim.ChaincodeStubInterface, args []string) 
 	json.Unmarshal(testAsBytes, &test)	
 	
 	return nil, nil
-}
+}*/

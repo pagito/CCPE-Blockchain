@@ -154,7 +154,7 @@ router.post('/getTransaction', function(req, res, next) {
         //res.send(responseObject);
 
         console.log('Returned data success',succ_data);
-        console.log(succ_data);
+        //console.log(succ_data);
     });
 
     //var responseObject =  { "message": "Transaction accepted",
@@ -193,8 +193,8 @@ router.get('/query_point', function(req, res){
 // TEST
 router.post('/testPost',function(req,res){
         var foo = req.body.foo;
-        var bar = req.body.FOO;
-        res.json({"foo":foo,"FOO":bar});
+        var bar = req.body.BOO;
+        res.json({"foo":foo,"BOO":bar});
 });
 
 /*
