@@ -13,8 +13,8 @@
 
 #docker-compose -f four-peer-ca.yaml up -d
 
-cd ../app-webservice
-#cd app-webservice
+#cd ../app-webservice
+cd app-webservice
 docker build -t ccpe/ws .
 
 # docker network connect bridge apphyperledger_vp0_1
