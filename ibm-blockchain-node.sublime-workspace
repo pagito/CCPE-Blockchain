@@ -283,7 +283,7 @@
 			"file": "start.sh",
 			"settings":
 			{
-				"buffer_size": 824,
+				"buffer_size": 830,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -598,7 +598,7 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -607,15 +607,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 824,
+						"buffer_size": 830,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								85,
-								85
+								830,
+								830
 							]
 						],
 						"settings":
@@ -629,7 +629,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -709,8 +709,8 @@
 						"selection":
 						[
 							[
-								2628,
-								2628
+								1544,
+								1544
 							]
 						],
 						"settings":
@@ -722,11 +722,11 @@
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.x": -0.0,
+						"translation.y": 663.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -742,8 +742,8 @@
 						"selection":
 						[
 							[
-								5363,
-								5366
+								8046,
+								8046
 							]
 						],
 						"settings":
@@ -755,10 +755,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3237.0,
+						"translation.y": 3042.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				}
 			]

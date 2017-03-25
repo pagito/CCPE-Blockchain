@@ -1,1 +1,1 @@
-deployment summery
+deployment summary

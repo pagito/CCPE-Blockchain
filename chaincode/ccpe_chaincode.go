@@ -90,12 +90,13 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string
 	        return nil, err
 	}
 
+	/*
 	var empty []string
 	jsonAsBytes, _ := json.Marshal(empty)								//marshal an emtpy array of strings to clear the index
 	err = stub.PutState(pointIndexStr, jsonAsBytes)
 	if err != nil {
 		return nil, err
-	}
+	}*/
 
 	/*
 	err = stub.PutState(testStr, jsonAsBytes)
