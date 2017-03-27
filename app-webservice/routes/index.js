@@ -150,8 +150,8 @@ router.post('/getTransaction', function(req, res, next) {
         var succ_data = data;
         res.json({
             //"msg":succ_data,
-            "respond":true,
-            "record_id":id
+            "respond": "true",
+            "record_id": "id"
         });
 
         //var responseObject = { "message": succ_data }
