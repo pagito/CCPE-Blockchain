@@ -120,7 +120,7 @@ router.get('/transaction', function(req, res) {
 
 
 /* Get POST data coming from Exchange APP */
-/*
+
 router.post('/getTransaction', function(req, res, next) {
 	console.log('savedata called');
     console.log(req.body);
@@ -165,7 +165,7 @@ router.post('/getTransaction', function(req, res, next) {
 
     console.log('savedata called');
 });
-*/
+
 
 // Get Chain stats
 router.get('/chain_stats', function(req, res){
