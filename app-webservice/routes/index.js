@@ -122,8 +122,7 @@ router.get('/transaction', function(req, res) {
 /* Get POST data coming from Exchange APP */
 
 router.post('/getTransaction', function(req, res, next) {
-	console.log('savedata called');
-    console.log(req.body);
+    console.log("savedata called: " + req.body + " ------------------------ ");
     
     var id = req.body.Transaction_id;
     var userA = req.body.User_A;
@@ -149,15 +148,16 @@ router.post('/getTransaction', function(req, res, next) {
 
         var succ_data = data;
         res.json({
-            //"msg":succ_data,
-            "respond": "true",
-            "record_id": "id"
+            "msg":succ_data
+            //"respond": "true",
+            //"record_id": "id"
         });
 
         //var responseObject = { "message": succ_data }
         //res.send(responseObject);
 
         console.log('Returned data success',succ_data);
+        console.log(" ------------------------ ");
         //console.log(succ_data);
     });
 
@@ -165,7 +165,7 @@ router.post('/getTransaction', function(req, res, next) {
 							//"respond": true };
 	//res.send(responseObject);
 
-    console.log('savedata called');
+    //console.log('savedata called');
 });
 
 
