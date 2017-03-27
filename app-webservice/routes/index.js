@@ -147,7 +147,7 @@ router.post('/getTransaction', function(req, res, next) {
 
         var succ_data = data;
         res.json({
-            "msg":succ_data,
+            //"msg":succ_data,
             "respond":true,
             "record_id":id
         });
