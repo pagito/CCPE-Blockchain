@@ -67,7 +67,7 @@ var my_cc;
             if(!cc.details.deployed_name || cc.details.deployed_name === ''){                //decide if I need to deploy or not
                 //console.log("Ready, but do not deploy yet");
                 my_cc = cc;
-                cc.deploy('init', ['Forza Juve'], {save_path: './cc_summaries', delay_ms: 90000}, function(e){                    //delay_ms is milliseconds to wait after deploy for conatiner to start, 50sec recommended
+                cc.deploy('init', ['Forza Juve'], {save_path: './cc_summaries', delay_ms: 30000}, function(e){                    //delay_ms is milliseconds to wait after deploy for conatiner to start, 50sec recommended
                     console.log("success deployed");
                     cb_deployed();
                 });
@@ -96,9 +96,9 @@ var my_cc;
     }
 
 
-    ibc.chain_stats(function(e, stats){
+    /*ibc.chain_stats(function(e, stats){
         console.log('got some stats', stats);
-    });
+    });*/
 
     /*ibc.get_transaction('d30a1445-185f-4853-b4d6-ee7b4dfa5534', function(err, data){
         console.log('found trans', err, data);
@@ -191,13 +191,13 @@ router.get('/query_point', function(req, res){
     });
 });
 */
-
+/*
 // TEST
 router.post('/testPost',function(req,res){
         var foo = req.body.foo;
         var bar = req.body.BOO;
         res.json({"foo":foo,"BOO":bar});
-});
+});*/
 
 /*
 // Init Point

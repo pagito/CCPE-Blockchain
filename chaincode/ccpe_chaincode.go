@@ -17,7 +17,7 @@ import (
 	"errors"
 	"fmt"
 	"strconv"
-	//"encoding/json"
+	"encoding/json"
 	//"time"
 	//"strings"
 
@@ -42,15 +42,15 @@ type Point struct{
 
 type Transaction struct{
 	Id string `json:"txID"`					   //Transaction ID from cppe system
-	Timestamp string `json:"ex_time"`		   //utc timestamp of creation
-	TraderA string  `json:"user_A_ID"`		   //UserA ID
-	TraderB string  `json:"user_B_ID"`         //UserB ID
-	SellerA string  `json:"seller_A_ID"`	   //UserA's Seller ID
-	SellerB string  `json:"seller_B_ID"`       //UserB's Seller ID
-	PointA string  `json:"point_A"`            //Points owned by UserA after exchange
-	PointB string  `json:"point_B"`            //Points owned by UserB after exchange
-	Prev_Transaction_id_A string `json:"prev_transaction_id_A"`
-	Prev_Transaction_id_B string `json:"prev_transaction_id_B"`
+	Timestamp string `json:"EX_TIME"`		   //utc timestamp of creation
+	TraderA string  `json:"USER_A_ID"`		   //UserA ID
+	TraderB string  `json:"USER_B_ID"`         //UserB ID
+	SellerA string  `json:"SELLER_A_ID"`	   //UserA's Seller ID
+	SellerB string  `json:"SELLER_B_ID"`       //UserB's Seller ID
+	PointA string  `json:"POINT_A"`            //Points owned by UserA after exchange
+	PointB string  `json:"POINT_B"`            //Points owned by UserB after exchange
+	Prev_Transaction_id_A string `json:"PREV_TR_ID_A"`
+	Prev_Transaction_id_B string `json:"PREV_TR_ID_B"`
 	//Related []Point `json:"related"`		   //array of points willing to trade away
 }
 
@@ -90,29 +90,39 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string
 	        return nil, err
 	}
 
-	/*
+	
 	var empty []string
 	jsonAsBytes, _ := json.Marshal(empty)								//marshal an emtpy array of strings to clear the index
 	err = stub.PutState(pointIndexStr, jsonAsBytes)
 	if err != nil {
 		return nil, err
-	}*/
+	}
 
-	/*
+	
 	err = stub.PutState(testStr, jsonAsBytes)
 	if err != nil {
 		return nil, err
-	}*/
-/*
+	}
+
 	var trades AllTx
 	jsonAsBytes, _ = json.Marshal(trades)								//clear the open trade struct
 	err = stub.PutState(transactionStr, jsonAsBytes)
 	if err != nil {
 		return nil, err
-	}*/
+	}
 
 	return nil, nil
 }
+
+
+// ============================================================================================================================
+// Run - Our entry point for Invocations - [LEGACY] obc-peer 4/25/2016
+// ============================================================================================================================
+func (t *SimpleChaincode) Run(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
+	fmt.Println("run is running " + function)
+	return t.Invoke(stub, function, args)
+}
+
 
 // Invoke is our entry point to invoke a chaincode function
 func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
