@@ -149,12 +149,14 @@ router.post('/getTransaction', function(req, res, next) {
 
         var succ_data = {"rame": 0, "rame2": "2342", "rameobieqti": {"w": 2}};        
         //var succ_data = succ_data.replace(/\\/g, '')
-        
-        res.json({
+
+        /*res.json({
             "msg":succ_data
             //"respond": "true",
             //"record_id": "id"
-        });
+        });*/
+
+        res.json(succ_data);
 
         //var responseObject = { "message": succ_data }
         //res.send(responseObject);
