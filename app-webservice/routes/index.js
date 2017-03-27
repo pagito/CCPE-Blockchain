@@ -67,7 +67,7 @@ var my_cc;
             if(!cc.details.deployed_name || cc.details.deployed_name === ''){                //decide if I need to deploy or not
                 //console.log("Ready, but do not deploy yet");
                 my_cc = cc;
-                cc.deploy('init', ['Forza Juve'], {save_path: './cc_summaries', delay_ms: 30000}, function(e){                    //delay_ms is milliseconds to wait after deploy for conatiner to start, 50sec recommended
+                cc.deploy('init', ['99'], {save_path: './cc_summaries', delay_ms: 30000}, function(e){                    //delay_ms is milliseconds to wait after deploy for conatiner to start, 50sec recommended
                     console.log("success deployed");
                     cb_deployed();
                 });
