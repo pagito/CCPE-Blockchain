@@ -301,7 +301,7 @@
 			"file": "app-webservice/routes/index.js",
 			"settings":
 			{
-				"buffer_size": 7214,
+				"buffer_size": 7388,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -310,7 +310,7 @@
 			"file": "chaincode/ccpe_chaincode.go",
 			"settings":
 			{
-				"buffer_size": 8939,
+				"buffer_size": 8926,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -684,15 +684,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 7214,
+						"buffer_size": 7388,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5501,
-								5501
+								5657,
+								5657
 							]
 						],
 						"settings":
@@ -705,7 +705,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1638.0,
+						"translation.y": 1872.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -717,15 +717,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8939,
+						"buffer_size": 8926,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1871,
-								1871
+								1317,
+								1317
 							]
 						],
 						"settings":
@@ -737,7 +737,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 653.0,
+						"translation.y": 1170.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,

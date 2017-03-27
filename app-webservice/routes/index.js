@@ -147,7 +147,7 @@ router.post('/getTransaction', function(req, res, next) {
 
         //var succ_data = data;
 
-        var succ_data = {"rame": 0, "rame2": "2342", "rameobieqti": {"w": 2}};        
+        var succ_data = {'rame': 0, 'rame2': '2342', 'rameobieqti': {'w': 2}}; 
         //var succ_data = succ_data.replace(/\\/g, '')
 
         /*res.json({
@@ -161,8 +161,8 @@ router.post('/getTransaction', function(req, res, next) {
         //var responseObject = { "message": succ_data }
         //res.send(responseObject);
 
-        console.log('Returned data success',succ_data);
-        console.log(" ------------------------ ");
+        //console.log('Returned data success',succ_data);
+        //console.log(" ------------------------ ");
         //console.log(succ_data);
     });
 
