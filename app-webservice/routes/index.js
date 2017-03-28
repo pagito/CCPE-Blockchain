@@ -145,9 +145,9 @@ router.post('/getTransaction', function(req, res, next) {
     my_cc.invoke.init_transaction([id,userA,userB,sellerA,sellerB,pointA,pointB,prev_trans_id_A,prev_trans_id_B,dateStr],function(err, data) {
 
 
-        //var succ_data = data;
+        var succ_data = data;
 
-        var succ_data = {"rame": 0, "rame2": "2342", "rameobieqti": {"w": 2}};        
+        //var succ_data = {"rame": 0, "rame2": "2342", "rameobieqti": {"w": 2}};        
         succ_data = JSON.stringify(succ_data);
         //var succ_data = succ_data.replace(/\\/g, '')
 
