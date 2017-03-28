@@ -638,7 +638,9 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/ShellScript/Shell-Unix-Generic.sublime-syntax"
+							"syntax": "Packages/ShellScript/Shell-Unix-Generic.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 1872.0,
@@ -691,8 +693,8 @@
 						"selection":
 						[
 							[
-								5657,
-								5657
+								5627,
+								5627
 							]
 						],
 						"settings":
@@ -705,7 +707,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1872.0,
+						"translation.y": 1794.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -724,8 +726,8 @@
 						"selection":
 						[
 							[
-								1317,
-								1317
+								834,
+								845
 							]
 						],
 						"settings":
@@ -737,7 +739,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1170.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -764,6 +766,8 @@
 						{
 							"auto_name": "/*",
 							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
 							"syntax": "Packages/Go/Go.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
