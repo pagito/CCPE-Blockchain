@@ -132,6 +132,8 @@ router.post('/savePoint', function(req, res){
     my_cc.invoke.init_point([transfer_id,owner,amount,seller],function(err,resp){
     //my_cc.invoke.init_point([transfer_id+'-'+dateStr+'-',owner],function(err,resp){
         var succ_data = resp;
+        succ_data = JSON.stringify(succ_data);
+
         res.json({"msg":succ_data});
         console.log('success',succ_data);  
     });

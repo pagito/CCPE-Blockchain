@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"seller",
+				"seller"
+			],
+			[
 				"fcn",
 				"fcn"
 			],
@@ -172,10 +176,6 @@
 				"reverse"
 			],
 			[
-				"seller",
-				"seller_id"
-			],
-			[
 				"al",
 				"alt\tAttr"
 			],
@@ -301,7 +301,7 @@
 			"file": "app-webservice/routes/index.js",
 			"settings":
 			{
-				"buffer_size": 7571,
+				"buffer_size": 8285,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -310,7 +310,7 @@
 			"file": "chaincode/ccpe_chaincode.go",
 			"settings":
 			{
-				"buffer_size": 8926,
+				"buffer_size": 12061,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -542,6 +542,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"transactionStr",
+			"pointIndexStr",
 			"ccpe",
 			"ccpx",
 			"encoding/json",
@@ -686,15 +688,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 7571,
+						"buffer_size": 8285,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6397,
-								6397
+								4847,
+								4847
 							]
 						],
 						"settings":
@@ -707,7 +709,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2016.0,
+						"translation.y": 1532.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -719,15 +721,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8926,
+						"buffer_size": 12061,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								834,
-								845
+								4974,
+								4974
 							]
 						],
 						"settings":
@@ -739,7 +741,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1542.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
