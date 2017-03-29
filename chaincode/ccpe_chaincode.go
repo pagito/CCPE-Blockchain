@@ -136,7 +136,9 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
         return t.write(stub, args)
     } else if function == "init_transaction" {
         return t.init_transaction(stub, args)
-    } else if function == "test"{
+    }  else if function == "init_point" {									//create a new marble
+		return t.init_point(stub, args) 
+    } else if function == "test" {
 		return t.test(stub, args)
 	}
 	fmt.Println("invoke did not find func: " + function)					//error
