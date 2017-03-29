@@ -35,9 +35,10 @@ var testStr = "_testIndex"
 
 
 type Point struct{
-	Id string `json:"id"`					   //the fieldtags are needed to keep case from bouncing around
-	Owner string `json:"owner"`
-	Amount int `json:"amount"`	
+	Id string `json:"transfer_id"`			   // transfer_points_id   //the fieldtags are needed to keep case from bouncing around
+	Owner string `json:"owner"`                // User ID of owner
+	Amount string `json:"amount"`	               // Amount of transfered points
+	Seller string `json:"seller"`	               // Seller ID of points
 }
 
 type Transaction struct{
@@ -203,7 +204,86 @@ func (t *SimpleChaincode) write(stub shim.ChaincodeStubInterface, args []string)
 	return nil, nil
 }
 
+
+
+// ============================================================================================================================
+// Init Point - create a new record of points ownership, who owns what? store into chaincode state
+// ============================================================================================================================
+func (t *SimpleChaincode) init_point(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
+	var err error
+
+	//   0        		1       
+	// "SellerXhash", "Owner"
+	if len(args) != 4 {
+		return nil, errors.New("Incorrect number of arguments. Expecting 3")
+	}
+
+	//input sanitation
+	fmt.Println("- start init point")
+	if len(args[0]) <= 0 {
+		return nil, errors.New("1st argument must be a non-empty string")
+	}
+	if len(args[1]) <= 0 {
+		return nil, errors.New("2nd argument must be a non-empty string")
+	}
+
+	if len(args[2]) <= 0 {
+		return nil, errors.New("3rd argument must be a non-empty string")
+	}
+
+	if len(args[3]) <= 0 {
+		return nil, errors.New("4th argument must be a non-empty string")
+	}
+
+	id := args[0]
+	owner := strings.ToLower(args[1])
+	amount := args[2]
+	seller := args[3]
+	
+
+	//check if points record already exists
+	pointAsBytes, err := stub.GetState(id)
+	if err != nil {
+		return nil, errors.New("Failed to get point id")
+	}
+
+	res := Point{}
+	json.Unmarshal(pointAsBytes, &res)
+	if res.Id == id{
+		fmt.Println("This point arleady exists: " + id)
+		fmt.Println(res);
+		return nil, errors.New("This point arleady exists")				//all stop a marble by this name exists
+	}
+	
+	//build the point json string manually
+	str := `{"id": "` + id + `", "owner": "` + owner + `", "amount": "` + amount + `, "seller": "` + seller + `"}`
+	err = stub.PutState(id, []byte(str))									//store marble with id as key
+	if err != nil {
+		return nil, err
+	}
+		
+	//get the points index
+	pointAsByte , err := stub.GetState(pointIndexStr)
+	if err != nil {
+		return nil, errors.New("Failed to get point index")
+	}
+	var pointIndex []string
+	json.Unmarshal(pointAsByte, &pointIndex)							//un stringify it aka JSON.parse()
+	
+	//append
+	pointIndex = append(pointIndex, id)									//add marble name to index list
+	fmt.Println("! point index: ", pointIndex)
+	jsonAsBytes, _ := json.Marshal(pointIndex)
+	err = stub.PutState(pointIndexStr, jsonAsBytes)						//store name of marble
+
+	fmt.Println("- end init marble")
+	return nil, nil
+}
  
+
+// ============================================================================================================================
+// Init Transaction - create a new record of transaction, who send to who? and what? store into chaincode state
+// ============================================================================================================================
 
 func (t *SimpleChaincode) init_transaction(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
 	var err error	
@@ -229,7 +309,7 @@ func (t *SimpleChaincode) init_transaction(stub shim.ChaincodeStubInterface, arg
 	err = stub.PutState("_debug1", jsonAsBytes)
 
 	//get the completed trade struct
-	tradesAsBytes, err := stub.GetState(pointIndexStr)
+	tradesAsBytes, err := stub.GetState(transactionStr)
 	if err != nil {
 		return nil, errors.New("Failed to get TXs")
 	}
@@ -237,10 +317,10 @@ func (t *SimpleChaincode) init_transaction(stub shim.ChaincodeStubInterface, arg
 	var trades AllTx
 	json.Unmarshal(tradesAsBytes, &trades)										//un stringify it aka JSON.parse()
 	
-	trades.TXs = append(trades.TXs, completed);						//append to completed trades
+	trades.TXs = append(trades.TXs, completed);						            //append to completed trades
 	fmt.Println("! appended completed to trades")
 	jsonAsBytes, _ = json.Marshal(trades)
-	err = stub.PutState(pointIndexStr, jsonAsBytes)								//rewrite completed orders
+	err = stub.PutState(transactionStr, jsonAsBytes)								//rewrite completed orders
 	if err != nil {
 		return nil, err
 	}

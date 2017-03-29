@@ -119,6 +119,28 @@ router.get('/transaction', function(req, res) {
 
 
 
+
+
+router.post('/savePoint', function(req, res){
+    var transfer_id = req.body.transfer_id;
+    var owner = req.body.user_id;
+    var amount = req.body.amount;
+    var seller = req.body.seller_id;
+    var curret_date = new Date();
+    var dateStr = curret_date.getFullYear()+''+curret_date.getMonth()+''+curret_date.getDate();
+    console.log('got point save request');
+    my_cc.invoke.init_point([transfer_id,owner,amount,seller],function(err,resp){
+    //my_cc.invoke.init_point([transfer_id+'-'+dateStr+'-',owner],function(err,resp){
+        var succ_data = resp;
+        res.json({"msg":succ_data});
+        console.log('success',succ_data);  
+    });
+});
+
+
+
+
+
 /* Get POST data coming from Exchange APP */
 
 router.post('/getTransaction', function(req, res, next) {
@@ -158,6 +180,9 @@ router.post('/getTransaction', function(req, res, next) {
         });*/
 
         res.json(succ_data);
+        // For next deployment I should try this JSON
+        //res.json({"result": succ_data.result, "id": succ_data.id});
+        // 
 
         //var responseObject = { "message": succ_data }
         //res.send(responseObject);
