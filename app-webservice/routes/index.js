@@ -122,6 +122,8 @@ router.get('/transaction', function(req, res) {
 
 
 router.post('/savePoint', function(req, res){
+    console.log("savedata called: " + req.body + " -----------savePoint---------- ");
+
     var transfer_id = req.body.transfer_id;
     var owner = req.body.user_id;
     var amount = req.body.amount;
@@ -146,7 +148,7 @@ router.post('/savePoint', function(req, res){
 /* Get POST data coming from Exchange APP */
 
 router.post('/getTransaction', function(req, res, next) {
-    console.log("savedata called: " + req.body + " ------------------------ ");
+    console.log("savedata called: " + req.body + " ----------saveTransaction-------------- ");
     
     var id = req.body.Transaction_id;
     var userA = req.body.User_A;
