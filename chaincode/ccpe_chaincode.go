@@ -29,7 +29,7 @@ type SimpleChaincode struct {
 }
 
 var pointIndexStr = "_pointindex"				//name for the key/value that will store a list of all known points
-var transactionStr = "_tx"				        //name for the key/value that will store all completed transactions
+var transactionStr = "_completedtx"				        //name for the key/value that will store all completed transactions
 
 var testStr = "_testIndex"
 
@@ -288,7 +288,7 @@ func (t *SimpleChaincode) init_point(stub shim.ChaincodeStubInterface, args []st
 func (t *SimpleChaincode) init_transaction(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
 	var err error	
 	//	0        1      2     3      4      5       6
-	//["000009", "claudio", "alex", "Taobao", "TMall", "500", "600", "4453", "4456", "22/3/2017 2:34:12"] *"blue", "35*
+	//["000009", "claudio", "alex", "Taobao", "TMall", "500", "600", "4453", "4456", "22/3/2017 2:34:12"]
 
 
 
@@ -306,7 +306,7 @@ func (t *SimpleChaincode) init_transaction(stub shim.ChaincodeStubInterface, arg
 	
 	fmt.Println("- start completed trade")
 	jsonAsBytes, _ := json.Marshal(completed)
-	err = stub.PutState("_debug1", jsonAsBytes)
+	err = stub.PutState("_debug1", jsonAsBytes)                                // Write completed transaction under the key _debug1
 
 	//get the completed trade struct
 	tradesAsBytes, err := stub.GetState(transactionStr)
