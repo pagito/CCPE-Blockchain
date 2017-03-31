@@ -237,7 +237,7 @@ func (t *SimpleChaincode) init_point(stub shim.ChaincodeStubInterface, args []st
 		return nil, errors.New("4th argument must be a non-empty string")
 	}
 
-	id := args[0]
+	transfer_id := args[0]
 	//owner := strings.ToLower(args[1])
 	owner := args[1]
 	amount := args[2]
@@ -245,23 +245,23 @@ func (t *SimpleChaincode) init_point(stub shim.ChaincodeStubInterface, args []st
 	
 
 	//check if points record already exists
-	pointAsBytes, err := stub.GetState(id)
+	pointAsBytes, err := stub.GetState(transfer_id)
 	if err != nil {
 		return nil, errors.New("Failed to get point id")
 	}
 
 	res := Point{}
 	json.Unmarshal(pointAsBytes, &res)
-	if res.Id == id{
-		fmt.Println("This point arleady exists: " + id)
+	if res.Id == transfer_id{
+		fmt.Println("This point arleady exists: " + transfer_id)
 		fmt.Println(res);
 		return nil, errors.New("This point arleady exists")				//all stop a marble by this name exists
 	}
 	
 	//build the point json string manually
 	//str := `{"id": "` + id + `", "owner": "` + owner + `", "amount": "` + amount + `, "seller": "` + seller + `"}`
-	str := `{"id": "` + id + `", "owner": "` + owner + `", "amount": "` + amount + `}`
-	err = stub.PutState(id, []byte(str))									//store Points with id as key
+	str := `{"transfer_id": "` + transfer_id + `", "owner": "` + owner + `", "amount": "` + amount + `}`
+	err = stub.PutState(transfer_id, []byte(str))									//store Points with id as key
 	if err != nil {
 		return nil, err
 	}
@@ -275,7 +275,7 @@ func (t *SimpleChaincode) init_point(stub shim.ChaincodeStubInterface, args []st
 	json.Unmarshal(pointAsByte, &pointIndex)							//un stringify it aka JSON.parse()
 	
 	//append
-	pointIndex = append(pointIndex, id)									//add points name to index list
+	pointIndex = append(pointIndex, transfer_id)									//add points name to index list
 	fmt.Println("! point index: ", pointIndex)
 	jsonAsBytes, _ := json.Marshal(pointIndex)
 	err = stub.PutState(pointIndexStr, jsonAsBytes)						//store name of Points (id of transfer) 
