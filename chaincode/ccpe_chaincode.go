@@ -238,7 +238,8 @@ func (t *SimpleChaincode) init_point(stub shim.ChaincodeStubInterface, args []st
 	}
 
 	id := args[0]
-	owner := strings.ToLower(args[1])
+	//owner := strings.ToLower(args[1])
+	owner := args[1]
 	amount := args[2]
 	seller := args[3]
 	
