@@ -18,8 +18,8 @@ import (
 	"fmt"
 	"strconv"
 	"encoding/json"
-	//"time"
-	"strings"
+	"time"
+	//"strings"
 
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 )
@@ -35,10 +35,10 @@ var testStr = "_testIndex"
 
 
 type Point struct{
-	Id int `json:"transfer_id"`			   // transfer_points_id   //the fieldtags are needed to keep case from bouncing around
+	Id string `json:"transfer_id"`			   // transfer_points_id   //the fieldtags are needed to keep case from bouncing around
 	Owner string `json:"owner"`                // User ID of owner
-	Amount int `json:"amount"`	               // Amount of transfered points
-	Seller string `json:"seller"`	               // Seller ID of points
+	Amount string `json:"amount"`	               // Amount of transfered points
+	//Seller string `json:"seller"`	               // Seller ID of points
 }
 
 type Transaction struct{
@@ -241,7 +241,7 @@ func (t *SimpleChaincode) init_point(stub shim.ChaincodeStubInterface, args []st
 	//owner := strings.ToLower(args[1])
 	owner := args[1]
 	amount := args[2]
-	seller := args[3]
+	//seller := args[3]
 	
 
 	//check if points record already exists
@@ -259,7 +259,8 @@ func (t *SimpleChaincode) init_point(stub shim.ChaincodeStubInterface, args []st
 	}
 	
 	//build the point json string manually
-	str := `{"id": "` + id + `", "owner": "` + owner + `", "amount": "` + amount + `, "seller": "` + seller + `"}`
+	//str := `{"id": "` + id + `", "owner": "` + owner + `", "amount": "` + amount + `, "seller": "` + seller + `"}`
+	str := `{"id": "` + id + `", "owner": "` + owner + `", "amount": "` + amount + `}`
 	err = stub.PutState(id, []byte(str))									//store Points with id as key
 	if err != nil {
 		return nil, err
