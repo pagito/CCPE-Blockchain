@@ -35,9 +35,9 @@ var testStr = "_testIndex"
 
 
 type Point struct{
-	Id string `json:"transfer_id"`			   // transfer_points_id   //the fieldtags are needed to keep case from bouncing around
+	Id int `json:"transfer_id"`			   // transfer_points_id   //the fieldtags are needed to keep case from bouncing around
 	Owner string `json:"owner"`                // User ID of owner
-	Amount string `json:"amount"`	               // Amount of transfered points
+	Amount int `json:"amount"`	               // Amount of transfered points
 	Seller string `json:"seller"`	               // Seller ID of points
 }
 
