@@ -122,7 +122,10 @@ router.get('/transaction', function(req, res) {
 
 
 router.post('/savePoint', function(req, res){
-    console.log("savedata called: " + req.body.Transfer_id + " -----------savePoint---------- ");
+    console.log("SavePoints called ! -----------savePoint---------- Transfer_id: " + req.body.Transfer_id + "  ");
+    console.log("User_id: " + req.body.User_id + " ");
+    console.log("Amount: " + req.body.Amount + " ");
+    console.log("Seller: " + req.body.Seller + " ");
 
     var transfer_id = req.body.Transfer_id;
     var owner = req.body.User_id;

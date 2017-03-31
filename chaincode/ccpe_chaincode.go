@@ -259,7 +259,7 @@ func (t *SimpleChaincode) init_point(stub shim.ChaincodeStubInterface, args []st
 	
 	//build the point json string manually
 	str := `{"id": "` + id + `", "owner": "` + owner + `", "amount": "` + amount + `, "seller": "` + seller + `"}`
-	err = stub.PutState(id, []byte(str))									//store marble with id as key
+	err = stub.PutState(id, []byte(str))									//store Points with id as key
 	if err != nil {
 		return nil, err
 	}
@@ -273,10 +273,10 @@ func (t *SimpleChaincode) init_point(stub shim.ChaincodeStubInterface, args []st
 	json.Unmarshal(pointAsByte, &pointIndex)							//un stringify it aka JSON.parse()
 	
 	//append
-	pointIndex = append(pointIndex, id)									//add marble name to index list
+	pointIndex = append(pointIndex, id)									//add points name to index list
 	fmt.Println("! point index: ", pointIndex)
 	jsonAsBytes, _ := json.Marshal(pointIndex)
-	err = stub.PutState(pointIndexStr, jsonAsBytes)						//store name of marble
+	err = stub.PutState(pointIndexStr, jsonAsBytes)						//store name of Points (id of transfer) 
 
 	fmt.Println("- end init marble")
 	return nil, nil
