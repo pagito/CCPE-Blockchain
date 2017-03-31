@@ -35,9 +35,9 @@ var testStr = "_testIndex"
 
 
 type Point struct{
-	Id string `json:"transfer_id"`			   // transfer_points_id   //the fieldtags are needed to keep case from bouncing around
+	Id int `json:"transfer_id,string,omitempty"`			   // transfer_points_id   //the fieldtags are needed to keep case from bouncing around
 	Owner string `json:"owner"`                // User ID of owner
-	Amount string `json:"amount"`	               // Amount of transfered points
+	//Amount string `json:"amount"`	               // Amount of transfered points
 	//Seller string `json:"seller"`	               // Seller ID of points
 }
 
@@ -240,7 +240,7 @@ func (t *SimpleChaincode) init_point(stub shim.ChaincodeStubInterface, args []st
 	transfer_id := args[0]
 	//owner := strings.ToLower(args[1])
 	owner := args[1]
-	amount := args[2]
+	//amount := args[2]
 	//seller := args[3]
 	
 
@@ -260,7 +260,8 @@ func (t *SimpleChaincode) init_point(stub shim.ChaincodeStubInterface, args []st
 	
 	//build the point json string manually
 	//str := `{"id": "` + id + `", "owner": "` + owner + `", "amount": "` + amount + `, "seller": "` + seller + `"}`
-	str := `{"transfer_id": "` + transfer_id + `", "owner": "` + owner + `", "amount": "` + amount + `}`
+	//str := `{"transfer_id": "` + transfer_id + `", "owner": "` + owner + `", "amount": "` + amount + `}`
+	str := `{"transfer_id": "` + transfer_id + `", "owner": "` + owner + `"}`
 	err = stub.PutState(transfer_id, []byte(str))									//store Points with id as key
 	if err != nil {
 		return nil, err
