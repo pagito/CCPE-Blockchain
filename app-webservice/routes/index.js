@@ -122,12 +122,12 @@ router.get('/transaction', function(req, res) {
 
 
 router.post('/savePoint', function(req, res){
-    console.log("savedata called: " + req.body + " -----------savePoint---------- ");
+    console.log("savedata called: " + req.body.Transfer_id + " -----------savePoint---------- ");
 
-    var transfer_id = req.body.transfer_id;
-    var owner = req.body.user_id;
-    var amount = req.body.amount;
-    var seller = req.body.seller_id;
+    var transfer_id = req.body.Transfer_id;
+    var owner = req.body.User_id;
+    var amount = req.body.Amount;
+    var seller = req.body.Seller;
     var curret_date = new Date();
     var dateStr = curret_date.getFullYear()+''+curret_date.getMonth()+''+curret_date.getDate();
     console.log('got point save request');
@@ -148,7 +148,7 @@ router.post('/savePoint', function(req, res){
 /* Get POST data coming from Exchange APP */
 
 router.post('/getTransaction', function(req, res, next) {
-    console.log("savedata called: " + req.body + " ----------saveTransaction-------------- ");
+    console.log("savedata called: " + req.body.Transaction_id + " ----------saveTransaction-------------- ");
     
     var id = req.body.Transaction_id;
     var userA = req.body.User_A;
