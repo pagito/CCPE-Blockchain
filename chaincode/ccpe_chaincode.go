@@ -169,8 +169,8 @@ func (t *SimpleChaincode) read(stub shim.ChaincodeStubInterface, args []string) 
 	var fun, jsonResp string
 	var err error
 
-	if len(args) != 1 {
-		return nil, errors.New("Incorrect number of arguments. Expecting name of the var to query")
+	if len(args) != 2 {
+		return nil, errors.New("Incorrect number of arguments. Expecting function name and name of the var to query")
 	}
 
 	fun = args[0]
@@ -179,8 +179,7 @@ func (t *SimpleChaincode) read(stub shim.ChaincodeStubInterface, args []string) 
 		if err != nil {
 			jsonResp = "{\"Error\":\"Failed to get state for " + args[1] + "\"}"
 			return nil, errors.New(jsonResp)
-		}
-				
+		}				
 		return valAsbytes, nil
 	} else if fun=="findLatest"{
 		seller,err := strconv.Atoi(args[1])
