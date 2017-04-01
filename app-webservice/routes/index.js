@@ -129,8 +129,8 @@ router.post('/savePoint', function(req, res){
 
     var transfer_id = req.body.Transfer_id;
     var owner = req.body.User_id;
-    //var amount = req.body.Amount;
-    //var seller = req.body.Seller;
+    var amount = req.body.Amount;
+    var seller = req.body.Seller;
     var curret_date = new Date();
     var dateStr = curret_date.getFullYear()+''+curret_date.getMonth()+''+curret_date.getDate();
     console.log('got point save request');
