@@ -182,6 +182,39 @@ func (t *SimpleChaincode) read(stub shim.ChaincodeStubInterface, args []string) 
 		}
 				
 		return valAsbytes, nil
+	} else if fcn=="findLatest"{
+		seller,err := strconv.Atoi(args[1])
+		fetch,err := strconv.Atoi(args[2])
+		txAsbytes, err := stub.GetState(transactionStr)	
+		if err != nil {
+			jsonResp = "{\"Error\":\"Failed to get state for " + args[1] + "\"}"
+			return nil, errors.New(jsonResp)
+		}
+
+		//some logic here
+		var trans AllTx
+		json.Unmarshal(txAsbytes, &trans)
+
+		var processed AllTx
+
+		for i := range trans.TXs{		
+			seller_rec_A,err := strconv.Atoi(trans.TXs[i].SellerA)
+			seller_rec_B,err := strconv.Atoi(trans.TXs[i].SellerB)
+			if err == nil {}
+			if (seller_rec_A == seller) || (seller_rec_B == seller){
+				processed.TXs = append(processed.TXs,trans.TXs[i])
+			}
+		}
+		var fulLen = len(processed.TXs)
+		if fetch < fulLen {
+			processed.TXs = processed.TXs[fulLen-fetch:]
+			jsonAsBytes, _ := json.Marshal(processed)
+
+			return jsonAsBytes, nil
+		}else{
+			jsonAsBytes, _ := json.Marshal(processed)
+			return jsonAsBytes, nil
+		}
 	}
 	return nil, err													//send it onward
 }
