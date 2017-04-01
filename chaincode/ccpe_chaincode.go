@@ -166,15 +166,15 @@ func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function strin
 // Read - read a variable from chaincode state
 // ============================================================================================================================
 func (t *SimpleChaincode) read(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
-	var func, jsonResp string
+	var fun, jsonResp string
 	var err error
 
 	if len(args) != 1 {
 		return nil, errors.New("Incorrect number of arguments. Expecting name of the var to query")
 	}
 
-	func = args[0]
-	if func == "read" {
+	fun = args[0]
+	if fun == "read" {
 		valAsbytes, err := stub.GetState(args[1])									//get the var from chaincode state
 		if err != nil {
 			jsonResp = "{\"Error\":\"Failed to get state for " + args[1] + "\"}"
@@ -182,9 +182,9 @@ func (t *SimpleChaincode) read(stub shim.ChaincodeStubInterface, args []string) 
 		}
 				
 		return valAsbytes, nil
-	} else if fcn=="findLatest"{
+	} else if fun=="findLatest"{
 		seller,err := strconv.Atoi(args[1])
-		fetch,err := strconv.Atoi(args[2])
+		limit,err := strconv.Atoi(args[2])
 		txAsbytes, err := stub.GetState(transactionStr)	
 		if err != nil {
 			jsonResp = "{\"Error\":\"Failed to get state for " + args[1] + "\"}"
@@ -206,8 +206,8 @@ func (t *SimpleChaincode) read(stub shim.ChaincodeStubInterface, args []string) 
 			}
 		}
 		var fulLen = len(processed.TXs)
-		if fetch < fulLen {
-			processed.TXs = processed.TXs[fulLen-fetch:]
+		if limit < fulLen {
+			processed.TXs = processed.TXs[fulLen-limit:]
 			jsonAsBytes, _ := json.Marshal(processed)
 
 			return jsonAsBytes, nil
