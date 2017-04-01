@@ -35,10 +35,11 @@ var testStr = "_testIndex"
 
 
 type Point struct{
-	Id string `json:"transfer_id"`			   // transfer_points_id   //the fieldtags are needed to keep case from bouncing around
+	Transfer string `json:"transfer_id"`			   // transfer_points_id   //the fieldtags are needed to keep case from bouncing around
 	Owner string `json:"owner"`                // User ID of owner
-	//Amount string `json:"amount"`	               // Amount of transfered points
-	//Seller string `json:"seller"`	               // Seller ID of points
+	Amount string `json:"amount"`	               // Amount of transfered points
+	Seller string `json:"seller"`	               // Seller ID of points
+	Timestamp string `json:"tr_time"`		   //utc timestamp of creation
 }
 
 type Transaction struct{
@@ -216,8 +217,8 @@ func (t *SimpleChaincode) init_point(stub shim.ChaincodeStubInterface, args []st
 
 	//   0        		1       
 	// "SellerXhash", "Owner"
-	if len(args) != 4 {
-		return nil, errors.New("Incorrect number of arguments. Expecting 3")
+	if len(args) != 5 {
+		return nil, errors.New("Incorrect number of arguments. Expecting 5")
 	}
 
 	//input sanitation
@@ -237,11 +238,16 @@ func (t *SimpleChaincode) init_point(stub shim.ChaincodeStubInterface, args []st
 		return nil, errors.New("4th argument must be a non-empty string")
 	}
 
+	if len(args[4]) <= 0 {
+		return nil, errors.New("5th argument must be a non-empty string")
+	}
+
 	transfer_id := args[0]
 	//owner := strings.ToLower(args[1])
 	owner := args[1]
-	//amount := args[2]
-	//seller := args[3]
+	amount := args[2]
+	seller := args[3]
+	tr_time := args[4]
 	
 
 	//check if points record already exists
@@ -252,16 +258,16 @@ func (t *SimpleChaincode) init_point(stub shim.ChaincodeStubInterface, args []st
 
 	res := Point{}
 	json.Unmarshal(pointAsBytes, &res)
-	if res.Id == transfer_id{
+	if res.Transfer == transfer_id{
 		fmt.Println("This point arleady exists: " + transfer_id)
 		fmt.Println(res);
 		return nil, errors.New("This point arleady exists")				//all stop a marble by this name exists
 	}
 	
 	//build the point json string manually
-	//str := `{"id": "` + id + `", "owner": "` + owner + `", "amount": "` + amount + `, "seller": "` + seller + `"}`
+	str := `{"transfer_id": "` + id + `", "owner": "` + owner + `", "amount": "` + amount + `, "seller": "` + seller + `, "timestamp": "` + tr_time + `"}`
 	//str := `{"transfer_id": "` + transfer_id + `", "owner": "` + owner + `", "amount": "` + amount + `}`
-	str := `{"transfer_id": "` + transfer_id + `", "owner": "` + owner + `"}`
+	//str := `{"transfer_id": "` + transfer_id + `", "owner": "` + owner + `"}`
 	err = stub.PutState(transfer_id, []byte(str))									//store Points with id as key
 	if err != nil {
 		return nil, err

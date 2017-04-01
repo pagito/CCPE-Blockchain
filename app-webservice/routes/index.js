@@ -134,14 +134,15 @@ router.post('/savePoint', function(req, res){
     var curret_date = new Date();
     var dateStr = curret_date.getFullYear()+''+curret_date.getMonth()+''+curret_date.getDate();
     console.log('got point save request');
-    my_cc.invoke.init_point([transfer_id,owner],function(err,resp){
+    //my_cc.invoke.init_point([transfer_id,owner],function(err,resp){
     //my_cc.invoke.init_point([transfer_id,owner,amount],function(err,resp){
-    //my_cc.invoke.init_point([transfer_id,owner,amount,seller],function(err,resp){
+    my_cc.invoke.init_point([transfer_id,owner,amount,seller,dateStr],function(err,resp){
     //my_cc.invoke.init_point([transfer_id+'-'+dateStr+'-',owner],function(err,resp){
         var succ_data = resp;
         succ_data = JSON.stringify(succ_data);
 
-        res.json({"msg":succ_data});
+        //res.json({"msg":succ_data});
+        res.json(succ_data);
         console.log('success',succ_data);  
     });
 });
