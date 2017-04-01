@@ -265,7 +265,7 @@ func (t *SimpleChaincode) init_point(stub shim.ChaincodeStubInterface, args []st
 	}
 	
 	//build the point json string manually
-	str := `{"transfer_id": "` + transfer_id + `", "owner": "` + owner + `", "amount": "` + amount + `, "seller": "` + seller + `, "timestamp": "` + tr_time + `"}`
+	str := `{"transfer_id": "` + transfer_id + `", "owner": "` + owner + `", "amount": "` + amount + `", "seller": "` + seller + `", "timestamp": "` + tr_time + `"}`
 	//str := `{"transfer_id": "` + transfer_id + `", "owner": "` + owner + `", "amount": "` + amount + `}`
 	//str := `{"transfer_id": "` + transfer_id + `", "owner": "` + owner + `"}`
 	err = stub.PutState(transfer_id, []byte(str))									//store Points with id as key
