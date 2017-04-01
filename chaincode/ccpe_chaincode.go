@@ -169,12 +169,12 @@ func (t *SimpleChaincode) read(stub shim.ChaincodeStubInterface, args []string) 
 	var fun, jsonResp string
 	var err error
 
-	if len(args) != 2 {
-		return nil, errors.New("Incorrect number of arguments. Expecting function name and name of the var to query")
-	}
-
 	fun = args[0]
 	if fun == "read" {
+		if len(args) != 2 {
+			return nil, errors.New("Incorrect number of arguments. Expecting function name and name of the var to query")
+		}
+
 		valAsbytes, err := stub.GetState(args[1])									//get the var from chaincode state
 		if err != nil {
 			jsonResp = "{\"Error\":\"Failed to get state for " + args[1] + "\"}"
@@ -182,6 +182,10 @@ func (t *SimpleChaincode) read(stub shim.ChaincodeStubInterface, args []string) 
 		}				
 		return valAsbytes, nil
 	} else if fun=="findLatest"{
+		if len(args) != 3 {
+			return nil, errors.New("Incorrect number of arguments. Expecting function name and name of the var to query")
+		}
+
 		seller,err := strconv.Atoi(args[1])
 		limit,err := strconv.Atoi(args[2])
 		txAsbytes, err := stub.GetState(transactionStr)	
