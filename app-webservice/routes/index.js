@@ -149,8 +149,6 @@ router.post('/savePoint', function(req, res){
 
 
 
-
-
 /* Get POST data coming from Exchange APP */
 
 router.post('/getTransaction', function(req, res, next) {
@@ -219,6 +217,44 @@ router.get('/chain_stats', function(req, res){
     });
 });
 
+
+router.post('/getLatTr', function(req, res, next){
+    var seller = req.body.SELLER_ID;
+    var num = req.body.LIMIT_NUM;
+    var diff = -28800000;
+    console.log('Got getLatTr request');
+    my_cc.query.read(['findLatest',seller,num],function(err,resp){
+        if(!err){
+
+            var pre = JSON.parse(resp);
+            if (pre.tx == null){
+                res.json({
+                    "respond":401,
+                    "content":null
+                });
+                return;
+            }
+            var len = (pre.tx.length);
+            for(var i =0 ;i <len;i++){
+                var ms = pre.tx[i].EX_TIME;
+                console.log(ms);
+                var m = new Date(parseInt(ms)-diff);
+                console.log(m);
+                pre.tx[i].EX_TIME = m.getFullYear()+'/'+padZ((m.getMonth()+1))+'/'+padZ(m.getDate())+" "+padZ(m.getHours())+":"+padZ(m.getMinutes())+":"+padZ(m.getSeconds());
+            }
+
+            res.json({
+                "respond":300,
+                "content":pre.tx
+            });
+            console.log('success',pre);  
+        }else{
+            console.log('fail');
+        }
+    });
+});
+
+
 /*
 // Query Points
 router.get('/query_point', function(req, res){
@@ -242,20 +278,6 @@ router.post('/testPost',function(req,res){
         res.json({"foo":foo,"BOO":bar});
 });*/
 
-/*
-// Init Point
-router.post('/init_point', function(req, res){
-    var seller = req.body.seller;
-    var owner = req.body.owner;
-    var curret_date = new Date();
-    var dateStr = curret_date.getFullYear()+''+curret_date.getMonth()+''+curret_date.getDate();
-    console.log('got init_marble request');
-    g_cc.invoke.init_point([seller+'-'+dateStr+'-',owner],function(err,resp){
-        var ss = resp;
-        res.json({"msg":ss});
-        console.log('success',ss);  
-    });
-});
-*/
+
 
 module.exports = router;

@@ -188,14 +188,18 @@ func (t *SimpleChaincode) read(stub shim.ChaincodeStubInterface, args []string) 
 
 		seller,err := strconv.Atoi(args[1])
 		limit,err := strconv.Atoi(args[2])
+
+		// Check Transaction index if it's not empty
 		txAsbytes, err := stub.GetState(transactionStr)	
 		if err != nil {
 			jsonResp = "{\"Error\":\"Failed to get state for " + args[1] + "\"}"
 			return nil, errors.New(jsonResp)
 		}
 
-		//some logic here
+		// Start logic
+		// Create a var from Transaction structure
 		var trans AllTx
+		// Read that structure for Transaction Index
 		json.Unmarshal(txAsbytes, &trans)
 
 		var processed AllTx
