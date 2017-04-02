@@ -227,13 +227,14 @@ router.post('/getLatTr', function(req, res, next){
         if(!err){
 
             var pre = JSON.parse(resp);
-            pre = JSON.stringify(pre);
+            //pre = JSON.stringify(pre);
 
             if (pre.tx == null){
-                res.json({
-                    "respond":401,
-                    "content":null
-                });
+
+                var msg = {"respond":401,
+                           "content":null};
+                msg = JSON.stringify(msg);
+                res.json(msg);
                 return;
             }
             var len = (pre.tx.length);
@@ -245,10 +246,10 @@ router.post('/getLatTr', function(req, res, next){
                 pre.tx[i].EX_TIME = m.getFullYear()+'/'+padZ((m.getMonth()+1))+'/'+padZ(m.getDate())+" "+padZ(m.getHours())+":"+padZ(m.getMinutes())+":"+padZ(m.getSeconds());
             }
 
-            res.json({
-                "respond":300,
-                "content":pre.tx
-            });
+            var msg1 = {"respond":300,
+                        "content":pre.tx};
+            msg1 = JSON.stringify(msg1);
+            res.json(msg1);
             console.log('success',pre);  
         }else{
             console.log('fail');
