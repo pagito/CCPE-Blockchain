@@ -279,5 +279,13 @@ router.post('/testPost',function(req,res){
 });*/
 
 
+    function padZ(s){
+        if (s.toString().length ==1){
+            return '0'+s;   
+        }
+        return s;
+    }
+
+
 
 module.exports = router;
