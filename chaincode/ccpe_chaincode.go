@@ -205,11 +205,11 @@ func (t *SimpleChaincode) read(stub shim.ChaincodeStubInterface, args []string) 
 		var founded AllTx
 
 		for i := range trans.TXs{		
-			seller_cc_A,err := strconv.Atoi(trans.TXs[i].SellerA)
+			//seller_cc_A,err := strconv.Atoi(trans.TXs[i].SellerA)
 			//seller_cc_B,err := strconv.Atoi(trans.TXs[i].SellerB)
 			if err == nil {}
 			//if (seller_cc_A == seller) || (seller_cc_B == seller){
-			if seller_cc_A == "JD" {
+			if "Taobao" == "JD" {
 				founded.TXs = append(founded.TXs,trans.TXs[i])
 			}
 		}
