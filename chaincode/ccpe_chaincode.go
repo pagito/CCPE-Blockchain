@@ -181,7 +181,7 @@ func (t *SimpleChaincode) read(stub shim.ChaincodeStubInterface, args []string) 
 			return nil, errors.New(jsonResp)
 		}				
 		return valAsbytes, nil
-	} else if fun=="findLatest"{
+	} else if fun=="findLatestBySeller"{
 		if len(args) != 3 {
 			return nil, errors.New("Incorrect number of arguments. Expecting function name and name of the var to query")
 		}
@@ -202,27 +202,31 @@ func (t *SimpleChaincode) read(stub shim.ChaincodeStubInterface, args []string) 
 		// Read that structure for Transaction Index
 		json.Unmarshal(txAsbytes, &trans)
 
-		var processed AllTx
+		var founded AllTx
 
 		for i := range trans.TXs{		
-			seller_rec_A,err := strconv.Atoi(trans.TXs[i].SellerA)
-			seller_rec_B,err := strconv.Atoi(trans.TXs[i].SellerB)
+			seller_bc_A,err := strconv.Atoi(trans.TXs[i].SellerA)
+			seller_bc_B,err := strconv.Atoi(trans.TXs[i].SellerB)
 			if err == nil {}
-			if (seller_rec_A == seller) || (seller_rec_B == seller){
-				processed.TXs = append(processed.TXs,trans.TXs[i])
+			if (seller_bc_A == seller) || (seller_bc_B == seller){
+				founded.TXs = append(founded.TXs,trans.TXs[i])
 			}
 		}
-		var fulLen = len(processed.TXs)
+		var fulLen = len(founded.TXs)
 		if limit < fulLen {
-			processed.TXs = processed.TXs[fulLen-limit:]
-			jsonAsBytes, _ := json.Marshal(processed)
+			founded.TXs = founded.TXs[fulLen-limit:]
+			jsonAsBytes, _ := json.Marshal(founded)
 
 			return jsonAsBytes, nil
 		}else{
-			jsonAsBytes, _ := json.Marshal(processed)
+			jsonAsBytes, _ := json.Marshal(founded)
 			return jsonAsBytes, nil
 		}
-	}
+	}/* else if fun=="findLatestTrs"{
+		if len(args) != 3 {
+			return nil, errors.New("Incorrect number of arguments. Expecting function name and name of the var to query")
+		}
+	}*/
 	return nil, err													//send it onward
 }
 

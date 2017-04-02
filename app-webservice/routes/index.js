@@ -218,12 +218,14 @@ router.get('/chain_stats', function(req, res){
 });
 
 
-router.post('/getLatTr', function(req, res, next){
+router.post('/getLastSelllerTrs', function(req, res, next){
     var seller = req.body.SELLER_ID;
     var num = req.body.LIMIT_NUM;
     var diff = -28800000;
-    console.log('Got getLatTr request');
-    my_cc.query.read(['findLatest',seller,num],function(err,resp){
+    console.log('Got getLastSelllerTrs request');
+    console.log('Seller: ' + seller);
+    console.log('Limit: ' + num);
+    my_cc.query.read(['findLatestBySeller',seller,num],function(err,resp){
         if(!err){
 
             var pre = JSON.parse(resp);
