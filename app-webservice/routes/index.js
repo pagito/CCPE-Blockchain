@@ -187,9 +187,9 @@ router.post('/getTransaction', function(req, res, next) {
             //"record_id": "id"
         });*/
 
-        res.json(succ_data);
+        //res.json(succ_data);
         // For next deployment I should try this JSON
-        //res.json({"result": succ_data.result, "id": succ_data.id});
+        res.json({"result": succ_data.result, "id": succ_data.id});
         // 
 
         //var responseObject = { "message": succ_data }
@@ -227,6 +227,8 @@ router.post('/getLatTr', function(req, res, next){
         if(!err){
 
             var pre = JSON.parse(resp);
+            pre = JSON.stringify(pre);
+
             if (pre.tx == null){
                 res.json({
                     "respond":401,
