@@ -186,7 +186,7 @@ func (t *SimpleChaincode) read(stub shim.ChaincodeStubInterface, args []string) 
 			return nil, errors.New("Incorrect number of arguments. Expecting function name and name of the var to query")
 		}
 
-		seller,err := strconv.Atoi(args[1])
+		//seller,err := strconv.Atoi(args[1])
 		limit,err := strconv.Atoi(args[2])
 
 		// Check Transaction index if it's not empty
