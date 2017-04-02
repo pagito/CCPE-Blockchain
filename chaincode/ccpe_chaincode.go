@@ -209,7 +209,7 @@ func (t *SimpleChaincode) read(stub shim.ChaincodeStubInterface, args []string) 
 			//seller_cc_B,err := strconv.Atoi(trans.TXs[i].SellerB)
 			if err == nil {}
 			//if (seller_cc_A == seller) || (seller_cc_B == seller){
-			if seller_cc_A == seller {
+			if seller_cc_A == "JD" {
 				founded.TXs = append(founded.TXs,trans.TXs[i])
 			}
 		}
