@@ -298,18 +298,6 @@
 			}
 		},
 		{
-			"contents": "var express = require('express');\nvar router = express.Router();\n\n/*var app = express();\nvar http = require('http').Server(app);\n\napp.use(function(req, res, next) {\n  res.header(\"Access-Control-Allow-Origin\", \"*\");\n  res.header(\"Access-Control-Allow-Headers\", \"Origin, X-Requested-With, Content-Type, Accept\");\n  next();\n});*/\n\nvar my_cc;\n\n // Step 1 ================================== \n    var Ibc1 = require('ibm-blockchain-js');\n    var ibc = new Ibc1(/*logger*/);             //you can pass a logger such as winston here - optional \n    var chaincode = {};\n \n    // ================================== \n    // configure ibc-js sdk \n    // ================================== \n    var options =   {\n        network:{\n            peers:   [{\n                \"api_host\": \"172.17.0.2\",\n                \"api_port\": 7050,\n                //\"api_port_tls\": xxx,\n                //\"id\": \"xxxxxx-xxxx-xxx-xxx-xxxxxxxxxxxx_vpx\"\n                \"id\": \"app_peer\"\n            }],\n            users:  [{\n                \"enrollId\": \"test_user0\",\n                \"enrollSecret\": \"MS9qrN8hFjlE\"\n            }],\n            options: {              //this is optional \n                quiet: true, \n                timeout: 60000,\n                tls: false,\n            }\n        },\n        chaincode:{\n            zip_url: 'https://github.com/pagito/CCPE-Blockchain/raw/master/chaincode/ccpe_chaincode.zip',\n            unzip_dir: '/',\n            git_url: 'https://github.com/pagito/CCPE-Blockchain/chaincode',\n            deployed_name: null\n            //deployed_name:'df9b6b3af9acd15fe6c9024a5b23c6deb7ded24bfaa2e95494ccca6e594a9746077dcb81a00cd67ebb4fbbab9e801ce20803cc28174ca8a51628c1ba9612729a'\n        }\n    };\n    \n    // Step 2 ================================== \n    ibc.load(options, cb_ready);\n \n    // Step 3 ==================================\n    function cb_ready(err, cc){                             //response has chaincode functions\n        //app1.setup(ibc, cc);\n        //app2.setup(ibc, cc);\n\n    // Step 4 ==================================\n        if(err != null){\n            console.log('! looks like an error loading the chaincode or network, app will fail\\n', err);\n            if(!process.error) process.error = {type: 'load', msg: err.details};                //if it already exist, keep the last error\n        } else {\n            \n            \n\n            if(!cc.details.deployed_name || cc.details.deployed_name === ''){                //decide if I need to deploy or not\n                //console.log(\"Ready, but do not deploy yet\");\n                my_cc = cc;\n                cc.deploy('init', ['99'], {save_path: './cc_summaries', delay_ms: 30000}, function(e){                    //delay_ms is milliseconds to wait after deploy for conatiner to start, 50sec recommended\n                    console.log(\"success deployed\");\n                    cb_deployed();\n                });\n            }\n            else{\n                my_cc = cc;\n                console.log(\"chaincode hash: \" + cc.details.deployed_name);\n                console.log('chaincode summary file indicates chaincode has been previously deployed');\n             \n                cb_deployed();\n            }\n        }\n    }\n\n    // Step 5 ==================================\n    function cb_deployed(err){\n        console.log('sdk has deployed code and waited');\n        //my_cc.invoke.Init(\"Forza Juve!\");\n        //console.log('Init done');\n        //my_cc.query.read(['dummy_query']);\n        //console.log('Query done');\n        //http.listen(8088, function(){\n          console.log('listening on *:3000');\n          \n        //});\n    }\n\n\n    /*ibc.chain_stats(function(e, stats){\n        console.log('got some stats', stats);\n    });*/\n\n    /*ibc.get_transaction('d30a1445-185f-4853-b4d6-ee7b4dfa5534', function(err, data){\n        console.log('found trans', err, data);\n    });*/\n\n\n/* GET home page. */\nrouter.get('/', function(req, res, next) {\n  res.render('index', { title: 'Express' });\n});\n\n\n/* Example of GET method, simple respond with a string */\nrouter.get('/transaction', function(req, res) {\n  var responseObject =  { message: \"Get Transaction Page\" };\n  res.send(responseObject);\n});\n\n\n\n\n\nrouter.post('/savePoint', function(req, res){\n    console.log(\"SavePoints called ! -----------savePoint---------- Transfer_id: \" + req.body.Transfer_id + \"  \");\n    console.log(\"User_id: \" + req.body.User_id + \" \");\n    console.log(\"Amount: \" + req.body.Amount + \" \");\n    console.log(\"Seller: \" + req.body.Seller + \" \");\n\n    var transfer_id = req.body.Transfer_id;\n    var owner = req.body.User_id;\n    var amount = req.body.Amount;\n    var seller = req.body.Seller;\n    var curret_date = new Date();\n    var dateStr = curret_date.getFullYear()+''+curret_date.getMonth()+''+curret_date.getDate();\n    console.log('got point save request');\n    //my_cc.invoke.init_point([transfer_id,owner],function(err,resp){\n    //my_cc.invoke.init_point([transfer_id,owner,amount],function(err,resp){\n    my_cc.invoke.init_point([transfer_id,owner,amount,seller,dateStr],function(err,resp){\n    //my_cc.invoke.init_point([transfer_id+'-'+dateStr+'-',owner],function(err,resp){\n        var succ_data = resp;\n        succ_data = JSON.stringify(succ_data);\n\n        //res.json({\"msg\":succ_data});\n        res.json(succ_data);\n        console.log('success',succ_data);  \n    });\n});\n\n\n\n/* Get POST data coming from Exchange APP */\n\nrouter.post('/getTransaction', function(req, res, next) {\n    console.log(\"savedata called: \" + req.body.Transaction_id + \" ----------saveTransaction-------------- \");\n    \n    var id = req.body.Transaction_id;\n    var userA = req.body.User_A;\n    var userB = req.body.User_B;\n    var sellerA = req.body.Seller_A;\n    var sellerB = req.body.Seller_B;    \n    var pointA = req.body.Ex_points_A;\n    var pointB = req.body.Ex_points_B;\n    var prev_trans_id_A = req.body.Prev_Transaction_ID_A;\n    var prev_trans_id_B = req.body.Prev_Transaction_ID_B;\n    //console.log(req.body.User_A);\n\n\tvar curret_date = new Date();\n    var dateStr = curret_date.getFullYear()+''+(curret_date.getMonth()+1)+''+curret_date.getDate();\n    console.log(\"date1: \" + dateStr);\n    console.log(\"date2: \" + Date.parse(new Date()));\n    var tmpID = sellerA+'-'+sellerB+'-'+dateStr+'-'+id;\n    console.log(\"Generated id / tmpID / not used :\" + tmpID);\n    console.log(\"Order id: \" + id);\n    my_cc.invoke.init_transaction([id,userA,userB,sellerA,sellerB,pointA,pointB,prev_trans_id_A,prev_trans_id_B,dateStr],function(err, data) {\n\n\n        var succ_data = data;\n\n        //var succ_data = {\"rame\": 0, \"rame2\": \"2342\", \"rameobieqti\": {\"w\": 2}};        \n        succ_data = JSON.stringify(succ_data);\n        //var succ_data = succ_data.replace(/\\\\/g, '')\n\n        /*res.json({\n            \"msg\":succ_data\n            //\"respond\": \"true\",\n            //\"record_id\": \"id\"\n        });*/\n\n        res.json(succ_data);\n        // For next deployment I should try this JSON\n        //res.json({\"result\": succ_data.result, \"id\": succ_data.id});\n        // \n\n        //var responseObject = { \"message\": succ_data }\n        //res.send(responseObject);\n\n        //console.log('Returned data success',succ_data);\n        //console.log(\" ------------------------ \");\n        //console.log(succ_data);\n    });\n\n    //var responseObject =  { \"message\": \"Transaction accepted\",\n\t\t\t\t\t\t\t//\"respond\": true };\n\t//res.send(responseObject);\n\n    //console.log('savedata called');\n});\n\n\n// Get Chain stats\nrouter.get('/chain_stats', function(req, res){\n    console.log('got stat request');\n    ibc.chain_stats(function(e, stats){\n        console.log('got some stats', stats);\n        res.json({\"stat\": stats});              \n    });\n});\n\n\nrouter.post('/getLatTr', function(req, res){\n    var seller = req.body.SELLER_ID;\n    var num = req.body.LIMIT_NUM;\n    var diff = -28800000;\n    console.log('Got getLatTr request');\n    my_cc.query.read(['findLatest',seller,num],function(err,resp){\n        if(!err){\n\n            var pre = JSON.parse(resp);\n            if (pre.tx == null){\n                res.json({\n                    \"respond\":401,\n                    \"content\":null\n                });\n                return;\n            }\n            var len = (pre.tx.length);\n            for(var i =0 ;i <len;i++){\n                var ms = pre.tx[i].EX_TIME;\n                console.log(ms);\n                var m = new Date(parseInt(ms)-diff);\n                console.log(m);\n                pre.tx[i].EX_TIME = m.getFullYear()+'/'+padZ((m.getMonth()+1))+'/'+padZ(m.getDate())+\" \"+padZ(m.getHours())+\":\"+padZ(m.getMinutes())+\":\"+padZ(m.getSeconds());\n            }\n\n            res.json({\n                \"respond\":300,\n                \"content\":pre.tx\n            });\n            console.log('success',pre);  \n        }else{\n            console.log('fail');\n        }\n    });\n});\n\n\n/*\n// Query Points\nrouter.get('/query_point', function(req, res){\n    console.log('got read request');\n    my_cc.query.read(['read','_pointindex'],function(err,resp){\n        if(!err){\n            //var ss = resp.result.message;\n            res.json(JSON.parse(resp));\n            console.log('success',resp);  \n        }else{\n            console.log('fail');\n        }\n    });\n});\n*/\n/*\n// TEST\nrouter.post('/testPost',function(req,res){\n        var foo = req.body.foo;\n        var bar = req.body.BOO;\n        res.json({\"foo\":foo,\"BOO\":bar});\n});*/\n\n\n\nmodule.exports = router;\n",
-			"file": "app-webservice/routes/index.js",
-			"file_size": 8775,
-			"file_write_time": 131355322192490023,
-			"settings":
-			{
-				"buffer_size": 9432,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "app-webservice/app.js",
 			"settings":
 			{
@@ -318,10 +306,19 @@
 			}
 		},
 		{
+			"file": "app-webservice/routes/index.js",
+			"settings":
+			{
+				"buffer_size": 9795,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "chaincode/ccpe_chaincode.go",
 			"settings":
 			{
-				"buffer_size": 13825,
+				"buffer_size": 14012,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -617,7 +614,7 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 4,
 			"sheets":
 			[
 				{
@@ -686,41 +683,8 @@
 				},
 				{
 					"buffer": 2,
-					"file": "app-webservice/routes/index.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 9432,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								7717,
-								7721
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
 					"file": "app-webservice/app.js",
-					"semi_transient": true,
+					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 1455,
@@ -730,8 +694,8 @@
 						"selection":
 						[
 							[
-								0,
-								0
+								741,
+								744
 							]
 						],
 						"settings":
@@ -744,10 +708,43 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 39.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "app-webservice/routes/index.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9795,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7934,
+								7940
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2693.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -756,15 +753,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 13825,
+						"buffer_size": 14012,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1606,
-								1613
+								6941,
+								6941
 							]
 						],
 						"settings":
@@ -776,10 +773,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 332.0,
+						"translation.y": 2347.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{

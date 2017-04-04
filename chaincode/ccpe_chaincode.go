@@ -186,7 +186,9 @@ func (t *SimpleChaincode) read(stub shim.ChaincodeStubInterface, args []string) 
 			return nil, errors.New("Incorrect number of arguments. Expecting function name and name of the var to query")
 		}
 
+		// Numeric conversions are Atoi (string to int
 		//seller,err := strconv.Atoi(args[1])
+		seller,err := args[1]
 		limit,err := strconv.Atoi(args[2])
 
 		// Check Transaction index if it's not empty
@@ -205,11 +207,13 @@ func (t *SimpleChaincode) read(stub shim.ChaincodeStubInterface, args []string) 
 		var founded AllTx
 
 		for i := range trans.TXs{		
+			// Amashia problema
 			//seller_cc_A,err := strconv.Atoi(trans.TXs[i].SellerA)
-			//seller_cc_B,err := strconv.Atoi(trans.TXs[i].SellerB)
+			seller_cc_B,err := strconv.Atoi(trans.TXs[i].SellerB)
+			seller_cc_A,err := trans.TXs[i].SellerA
+			seller_cc_B,err := trans.TXs[i].SellerB
 			if err == nil {}
-			//if (seller_cc_A == seller) || (seller_cc_B == seller){
-			if "Taobao" == "JD" {
+			if (seller_cc_A == seller) || (seller_cc_B == seller){
 				founded.TXs = append(founded.TXs,trans.TXs[i])
 			}
 		}
