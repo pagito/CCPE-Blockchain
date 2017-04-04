@@ -188,7 +188,7 @@ func (t *SimpleChaincode) read(stub shim.ChaincodeStubInterface, args []string) 
 
 		// Numeric conversions are Atoi (string to int
 		//seller,err := strconv.Atoi(args[1])
-		seller,err := args[1]
+		seller = args[1]
 		limit,err := strconv.Atoi(args[2])
 
 		// Check Transaction index if it's not empty
@@ -209,9 +209,9 @@ func (t *SimpleChaincode) read(stub shim.ChaincodeStubInterface, args []string) 
 		for i := range trans.TXs{		
 			// Amashia problema
 			//seller_cc_A,err := strconv.Atoi(trans.TXs[i].SellerA)
-			seller_cc_B,err := strconv.Atoi(trans.TXs[i].SellerB)
-			seller_cc_A,err := trans.TXs[i].SellerA
-			seller_cc_B,err := trans.TXs[i].SellerB
+			//seller_cc_B,err := strconv.Atoi(trans.TXs[i].SellerB)
+			seller_cc_A = trans.TXs[i].SellerA
+			seller_cc_B = trans.TXs[i].SellerB
 			if err == nil {}
 			if (seller_cc_A == seller) || (seller_cc_B == seller){
 				founded.TXs = append(founded.TXs,trans.TXs[i])
