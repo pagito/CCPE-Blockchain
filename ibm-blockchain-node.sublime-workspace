@@ -318,7 +318,7 @@
 			"file": "chaincode/ccpe_chaincode.go",
 			"settings":
 			{
-				"buffer_size": 14012,
+				"buffer_size": 14162,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -753,15 +753,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 14012,
+						"buffer_size": 14162,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6941,
-								6941
+								7240,
+								7240
 							]
 						],
 						"settings":
@@ -773,7 +773,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2347.0,
+						"translation.y": 2308.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
