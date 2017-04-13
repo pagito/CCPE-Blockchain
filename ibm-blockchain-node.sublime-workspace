@@ -309,7 +309,7 @@
 			"file": "app-webservice/routes/index.js",
 			"settings":
 			{
-				"buffer_size": 9795,
+				"buffer_size": 9797,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -395,6 +395,8 @@
 	],
 	"file_history":
 	[
+		"/C/Users/Gio/Desktop/CODEY/views.py",
+		"/C/Users/Gio/Desktop/CODEY/orderapp/forms.py",
 		"/C/Users/Gio/Desktop/test_chain.go",
 		"/C/Users/Gio/AppData/Local/temp/Rar$DIa0.510/ccpe_chaincode.go",
 		"/C/node/nodeapp-ws-blockchain/chaincode/ccpe_ch.go",
@@ -520,9 +522,7 @@
 		"/C/Users/Gio/Envs/exchangeplatform/manage.py",
 		"/C/Users/Gio/Envs/exchangeplatform/exchangeapp/templates/exchangeapp/404.html",
 		"/C/Users/Gio/Envs/exchangeplatform/exchangeapp/templates/exchangeapp/profile.html",
-		"/C/Users/Gio/Envs/exchangeplatform/exchangeapp/templates/exchangeapp/signup.html",
-		"/C/xampp/htdocs/igeomarket/application/views/layout/header.php",
-		"/C/Users/Gio/Envs/exchangeplatform/exchangeapp/templates/registration/logout.html"
+		"/C/Users/Gio/Envs/exchangeplatform/exchangeapp/templates/exchangeapp/signup.html"
 	],
 	"find":
 	{
@@ -614,7 +614,7 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -720,15 +720,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 9795,
+						"buffer_size": 9797,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								8712,
-								8712
+								5611,
+								5611
 							]
 						],
 						"settings":
@@ -741,10 +741,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 5119.0,
+						"translation.y": 3319.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -760,8 +760,8 @@
 						"selection":
 						[
 							[
-								7580,
-								7580
+								10426,
+								10426
 							]
 						],
 						"settings":
@@ -773,10 +773,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 4538.0,
+						"translation.y": 5895.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
