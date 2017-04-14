@@ -176,7 +176,7 @@ router.post('/sendTransaction', function(req, res, next) {
             my_cc.invoke.init_transaction([id,userA,seller,amount,prev_trans_id,dateStr],function(err, data) {
                 console.log('Returned data success', data);
                 var succ_data = data;
-                //succ_data = JSON.stringify(succ_data);
+                succ_data = JSON.stringify(succ_data);
                 result_data.push(succ_data);
                 //result_data.push({"test": "test_value"});
                 console.log("Result inside the loop: ");
