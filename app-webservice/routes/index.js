@@ -155,7 +155,7 @@ router.post('/savePoint', function(req, res){
 router.post('/sendTransaction', function(req, res, next) {
     console.log("savedata called: " + req.body + " ----------saveTransaction-------------- ");
     
-
+    var result_data = [];
     for(var key in req.body) {
       if(req.body.hasOwnProperty(key)) {
         item = req.body[key];
@@ -174,10 +174,11 @@ router.post('/sendTransaction', function(req, res, next) {
         my_cc.invoke.init_transaction([id,userA,seller,amount,prev_trans_id,dateStr],function(err, data) {
             var succ_data = data;
             succ_data = JSON.stringify(succ_data);
-            res.json(succ_data);
+            result_data.push(succ_data);            
         });
       }
     }
+    res.json(result_data);
 });
 
 
