@@ -176,10 +176,14 @@ router.post('/sendTransaction', function(req, res, next) {
             //var succ_data = data;
             //succ_data = JSON.stringify(succ_data);
             //result_data.push(succ_data);
-            result_data.push({"test": "test_value"});            
+            result_data.push({"test": "test_value"});
+            console.log("Result inside the loop: ");
+            console.log(result_data);           
         });
       }
     }
+    console.log("Final Result, outside the loop: ");
+    console.log(result_data);
     res.json(result_data);
 
 /*    var dateStr = curret_date.getFullYear()+''+(curret_date.getMonth()+1)+''+curret_date.getDate();
