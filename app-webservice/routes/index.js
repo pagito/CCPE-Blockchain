@@ -157,38 +157,27 @@ router.post('/sendTransaction', function(req, res, next) {
     
 
     for(var key in req.body) {
-      if(req.body.hasOwnProperty(key)){
+      if(req.body.hasOwnProperty(key)) {
         item = req.body[key];
         console.log(item);
+
+        var id = item.Transaction_id;
+        var userA = item.User_A;
+        //var userB = item.User_B;
+        var seller = item.Seller; 
+        var amount = item.Ex_points;
+        var prev_trans_id = item.Prev_Transaction_ID;
+        
+        var curret_date = new Date();
+        var dateStr = curret_date.getFullYear()+''+(curret_date.getMonth()+1)+''+curret_date.getDate();
+
+        my_cc.invoke.init_transaction([id,userA,seller,amount,prev_trans_id,dateStr],function(err, data) {
+            var succ_data = data;
+            succ_data = JSON.stringify(succ_data);
+            res.json(succ_data);
+        });
       }
     }
-
-    res.json("succ_data");
-        
-/*    var id = req.body.Transaction_id;
-    var userA = req.body.User_A;
-    var userB = req.body.User_B;
-    var sellerA = req.body.Seller_A;
-    var sellerB = req.body.Seller_B;    
-    var pointA = req.body.Ex_points_A;
-    var pointB = req.body.Ex_points_B;
-    var prev_trans_id_A = req.body.Prev_Transaction_ID_A;
-    var prev_trans_id_B = req.body.Prev_Transaction_ID_B;*/
-    //console.log(req.body.User_A);
-
-/*    var curret_date = new Date();
-    var dateStr = curret_date.getFullYear()+''+(curret_date.getMonth()+1)+''+curret_date.getDate();
-    console.log("date1: " + dateStr);
-    console.log("date2: " + Date.parse(new Date()));
-    var tmpID = sellerA+'-'+sellerB+'-'+dateStr+'-'+id;
-    console.log("Order id: " + id);
-    my_cc.invoke.init_transaction([id,userA,userB,sellerA,sellerB,pointA,pointB,prev_trans_id_A,prev_trans_id_B,dateStr],function(err, data) {
-
-        var succ_data = data;      
-        succ_data = JSON.stringify(succ_data);
-        res.json(succ_data);
-    });*/
-
 });
 
 

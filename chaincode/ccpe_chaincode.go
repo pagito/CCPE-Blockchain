@@ -35,25 +35,21 @@ var testStr = "_testIndex"
 
 
 type Point struct{
-	Transfer string `json:"transfer_id"`			   // transfer_points_id   //the fieldtags are needed to keep case from bouncing around
-	Owner string `json:"owner"`                // User ID of owner
-	Amount string `json:"amount"`	               // Amount of transfered points
-	Seller string `json:"seller"`	               // Seller ID of points
-	Timestamp string `json:"tr_time"`		   //utc timestamp of creation
+	Transfer string `json:"transfer_id"`		  // transfer_points_id   //the fieldtags are needed to keep case from bouncing around
+	Owner string `json:"owner"`                   // User ID of owner
+	Amount string `json:"amount"`	              // Amount of transfered points
+	Seller string `json:"seller"`	              // Seller ID of points
+	Timestamp string `json:"tr_time"`		      //utc timestamp of creation
 }
 
 type Transaction struct{
-	Id string `json:"txID"`					   //Transaction ID from cppe system
-	Timestamp string `json:"EX_TIME"`		   //utc timestamp of creation
-	TraderA string  `json:"USER_A_ID"`		   //UserA ID
-	TraderB string  `json:"USER_B_ID"`         //UserB ID
-	SellerA string  `json:"SELLER_A_ID"`	   //UserA's Seller ID
-	SellerB string  `json:"SELLER_B_ID"`       //UserB's Seller ID
-	PointA string  `json:"POINT_A"`            //Points owned by UserA after exchange
-	PointB string  `json:"POINT_B"`            //Points owned by UserB after exchange
-	Prev_Transaction_id_A string `json:"PREV_TR_ID_A"`
-	Prev_Transaction_id_B string `json:"PREV_TR_ID_B"`
-	//Related []Point `json:"related"`		   //array of points willing to trade away
+	Id string `json:"txID"`					        //Transaction ID from cppe system
+	Timestamp string `json:"EX_TIME"`		        //utc timestamp of creation
+	TraderA string  `json:"USER_A_ID"`		        //UserA ID
+	//TraderB string  `json:"USER_B_ID"`            //UserB ID
+	Seller string  `json:"SELLER_ID"`	            //UserA's Seller ID
+	Point_Amount string  `json:"POINT_AMOUNT"`                 //Points owned by UserA after exchange
+	Prev_Transaction_id string `json:"PREV_TR_ID"`
 }
 
 
@@ -355,14 +351,11 @@ func (t *SimpleChaincode) init_transaction(stub shim.ChaincodeStubInterface, arg
 	completed := Transaction{}
 	completed.Id = args[0]	
 	completed.TraderA = args[1]
-	completed.TraderB = args[2]
-	completed.SellerA = args[3]
-	completed.SellerB = args[4]
-	completed.PointA = args[5]
-	completed.PointB = args[6]
-	completed.Prev_Transaction_id_A = args[7]
-	completed.Prev_Transaction_id_B = args[8]
-	completed.Timestamp = args[9]
+	//completed.TraderB = args[2]
+	completed.Seller = args[2]
+	completed.Point_Amount = args[3]
+	completed.Prev_Transaction_id = args[4]
+	completed.Timestamp = args[5]
 	
 	fmt.Println("- start completed trade")
 	jsonAsBytes, _ := json.Marshal(completed)
