@@ -204,12 +204,12 @@ func (t *SimpleChaincode) read(stub shim.ChaincodeStubInterface, args []string) 
 
 		for i := range trans.TXs{		
 			// Amashia problema
-			seller_cc_A,err := strconv.Atoi(trans.TXs[i].SellerA)
-			seller_cc_B,err := strconv.Atoi(trans.TXs[i].SellerB)
+			seller_cc,err := strconv.Atoi(trans.TXs[i].Seller)
+			//seller_cc_B,err := strconv.Atoi(trans.TXs[i].SellerB)
 			//seller_cc_A = trans.TXs[i].SellerA
 			//seller_cc_B = trans.TXs[i].SellerB
 			if err == nil {}
-			if (seller_cc_A == seller) || (seller_cc_B == seller){
+			if (seller_cc == seller) {
 				founded.TXs = append(founded.TXs,trans.TXs[i])
 			}
 		}
