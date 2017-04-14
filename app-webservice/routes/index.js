@@ -157,19 +157,20 @@ router.post('/sendTransaction', function(req, res, next) {
     
     var result_data = [];
     for(var key in req.body) {
-      if(req.body.hasOwnProperty(key)) {
-        item = req.body[key];
-        console.log(item);
+        if(req.body.hasOwnProperty(key)) {
+            item = req.body[key];
+            console.log(item);
 
-        var id = item.Transaction_id;
-        var userA = item.User_A;
-        //var userB = item.User_B;
-        var seller = item.Seller; 
-        var amount = item.Ex_points;
-        var prev_trans_id = item.Prev_Transaction_ID;
-        
-        var curret_date = new Date();
-        var dateStr = curret_date.getFullYear()+''+(curret_date.getMonth()+1)+''+curret_date.getDate();
+            var id = item.Transaction_id;
+            var userA = item.User_A;
+            //var userB = item.User_B;
+            var seller = item.Seller; 
+            var amount = item.Ex_points;
+            var prev_trans_id = item.Prev_Transaction_ID;
+
+            var curret_date = new Date();
+            var dateStr = curret_date.getFullYear()+''+(curret_date.getMonth()+1)+''+curret_date.getDate();
+        }
 
         my_cc.invoke.init_transaction([id,userA,seller,amount,prev_trans_id,dateStr],function(err, data) {
             console.log('Returned data success', data);
@@ -180,7 +181,6 @@ router.post('/sendTransaction', function(req, res, next) {
             console.log("Result inside the loop: ");
             console.log(result_data);           
         });
-      }
     }
     console.log("Final Result, outside the loop: ");
     console.log(result_data);
