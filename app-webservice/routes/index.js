@@ -172,12 +172,15 @@ router.post('/sendTransaction', function(req, res, next) {
         var dateStr = curret_date.getFullYear()+''+(curret_date.getMonth()+1)+''+curret_date.getDate();
 
         my_cc.invoke.init_transaction([id,userA,seller,amount,prev_trans_id,dateStr],function(err, data) {
-            var succ_data = data;
-            succ_data = JSON.stringify(succ_data);
-            result_data.push(succ_data);            
+            //var succ_data = data;
+            //succ_data = JSON.stringify(succ_data);
+            //result_data.push(succ_data);
+            result_data.push({"test": "test_value"});            
         });
       }
-    }
+    }    
+    console.log("Final Result: ");
+    console.log(result_data);
     res.json(result_data);
 });
 
