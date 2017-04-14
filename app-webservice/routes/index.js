@@ -180,8 +180,9 @@ router.post('/sendTransaction', function(req, res, next) {
         });
       }
     }
+    res.json(result_data);
 
-    var dateStr = curret_date.getFullYear()+''+(curret_date.getMonth()+1)+''+curret_date.getDate();
+/*    var dateStr = curret_date.getFullYear()+''+(curret_date.getMonth()+1)+''+curret_date.getDate();
     my_cc.invoke.init_transaction(["222","userA","seller","300","333",dateStr],function(err, data) {
         console.log('Returned data success', data);
         //var succ_data = data;
@@ -191,7 +192,7 @@ router.post('/sendTransaction', function(req, res, next) {
         console.log("Final Result: ");
         console.log(result_data);
         res.json(result_data);            
-    });    
+    });   */ 
     
 });
 
