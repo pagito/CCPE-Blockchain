@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"succ",
+				"succ_data"
+			],
+			[
 				"seller",
 				"seller"
 			],
@@ -309,7 +313,7 @@
 			"file": "app-webservice/routes/index.js",
 			"settings":
 			{
-				"buffer_size": 11039,
+				"buffer_size": 11959,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -318,7 +322,7 @@
 			"file": "chaincode/ccpe_chaincode.go",
 			"settings":
 			{
-				"buffer_size": 14162,
+				"buffer_size": 13799,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -720,15 +724,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 11039,
+						"buffer_size": 11959,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5525,
-								5525
+								6639,
+								6639
 							]
 						],
 						"settings":
@@ -741,7 +745,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 3358.0,
+						"translation.y": 3829.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -753,15 +757,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 14162,
+						"buffer_size": 13799,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								10426,
-								10426
+								12718,
+								12732
 							]
 						],
 						"settings":
@@ -773,7 +777,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 5895.0,
+						"translation.y": 7647.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,

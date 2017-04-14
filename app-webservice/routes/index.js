@@ -155,7 +155,7 @@ router.post('/savePoint', function(req, res){
 router.post('/sendTransaction', function(req, res, next) {
     console.log("savedata called: " + req.body + " ----------saveTransaction-------------- ");
     
-    var result_data = [];
+    //var result_data = [];
     var k = 0;
     for(var key in req.body) {
         console.log(key);
@@ -178,10 +178,11 @@ router.post('/sendTransaction', function(req, res, next) {
                 //var succ_data = data;
                 //data = JSON.stringify(data);
                 //result_data.push(data);
-                result_data.push({"test": "test_value"});
+                //result_data.push({"test": "test_value"});
+                var result_data = {"test": "test_value"};
                 console.log("Result inside the loop: ");
                 console.log(result_data);
-                result_data = JSON.stringify(result_data);    
+                //result_data = JSON.stringify(result_data);    
 
                 if (key == k) {
                     res.json(result_data);
