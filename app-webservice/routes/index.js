@@ -154,8 +154,17 @@ router.post('/savePoint', function(req, res){
 
 router.post('/sendTransaction', function(req, res, next) {
     console.log("savedata called: " + req.body + " ----------saveTransaction-------------- ");
-    res.json("succ_data");
     
+
+    for(var key in req.body) {
+      if(req.body.hasOwnProperty(key)){
+        item = req.body[key];
+        console.log(item);
+      }
+    }
+
+    res.json("succ_data");
+        
 /*    var id = req.body.Transaction_id;
     var userA = req.body.User_A;
     var userB = req.body.User_B;
