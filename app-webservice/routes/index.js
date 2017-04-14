@@ -182,7 +182,7 @@ router.post('/sendTransaction', function(req, res, next) {
                 var result_data = {"test": "test_value"};
                 console.log("Result inside the loop: ");
                 console.log(result_data);
-                //result_data = JSON.stringify(result_data);    
+                result_data = JSON.stringify(result_data);    
 
                 if (key == k) {
                     res.json(result_data);
