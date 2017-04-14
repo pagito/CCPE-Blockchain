@@ -185,15 +185,28 @@ router.post('/sendTransaction', function(req, res, next) {
                 result_data = JSON.stringify(result_data);    
 
                 if (key == k) {
-                    res.json(result_data);
+                    //res.json(result_data);
                 }         
 
             });
         }
     }
-    //console.log("Final Result, outside the loop: ");
-    //console.log(result_data);
-    //res.json(result_data);
+    my_cc.invoke.init_transaction([id,userA,seller,amount,prev_trans_id,dateStr],function(err, data) {
+        console.log('Returned data success', data);
+        //var succ_data = data;
+        //data = JSON.stringify(data);
+        //result_data.push(data);
+        //result_data.push({"test": "test_value"});
+        var result_data = {"test": "test_value"};
+        console.log("Result inside the loop: ");
+        console.log(result_data);
+        result_data = JSON.stringify(result_data);    
+
+        //if (key == k) {
+            res.json(result_data);
+        //}         
+
+    });
 
 /*    var dateStr = curret_date.getFullYear()+''+(curret_date.getMonth()+1)+''+curret_date.getDate();
     my_cc.invoke.init_transaction(["222","userA","seller","300","333",dateStr],function(err, data) {
