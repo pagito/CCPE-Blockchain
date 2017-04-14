@@ -156,7 +156,9 @@ router.post('/sendTransaction', function(req, res, next) {
     console.log("savedata called: " + req.body + " ----------saveTransaction-------------- ");
     
     var result_data = [];
+    var k = 0;
     for(var key in req.body) {
+        console.log(key);
         if(req.body.hasOwnProperty(key)) {
             item = req.body[key];
             console.log(item);
@@ -170,21 +172,26 @@ router.post('/sendTransaction', function(req, res, next) {
 
             var curret_date = new Date();
             var dateStr = curret_date.getFullYear()+''+(curret_date.getMonth()+1)+''+curret_date.getDate();
-        }
 
-        my_cc.invoke.init_transaction([id,userA,seller,amount,prev_trans_id,dateStr],function(err, data) {
-            console.log('Returned data success', data);
-            //var succ_data = data;
-            //succ_data = JSON.stringify(succ_data);
-            //result_data.push(succ_data);
-            result_data.push({"test": "test_value"});
-            console.log("Result inside the loop: ");
-            console.log(result_data);           
-        });
+            my_cc.invoke.init_transaction([id,userA,seller,amount,prev_trans_id,dateStr],function(err, data) {
+                console.log('Returned data success', data);
+                //var succ_data = data;
+                //succ_data = JSON.stringify(succ_data);
+                //result_data.push(succ_data);
+                result_data.push({"test": "test_value"});
+                console.log("Result inside the loop: ");
+                console.log(result_data);    
+
+                if (key == k) {
+                    res.json(result_data);
+                }         
+
+            });
+        }
     }
-    console.log("Final Result, outside the loop: ");
-    console.log(result_data);
-    res.json(result_data);
+    //console.log("Final Result, outside the loop: ");
+    //console.log(result_data);
+    //res.json(result_data);
 
 /*    var dateStr = curret_date.getFullYear()+''+(curret_date.getMonth()+1)+''+curret_date.getDate();
     my_cc.invoke.init_transaction(["222","userA","seller","300","333",dateStr],function(err, data) {
