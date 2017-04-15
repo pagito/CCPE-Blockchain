@@ -155,13 +155,23 @@ router.post('/savePoint', function(req, res){
 router.post('/sendTransaction', function(req, res, next) {
     console.log("savedata called: " + req.body + " ----------saveTransaction-------------- ");
     
-    //var result_data = [];
-    var k = 0;
+    
+    var count = 0;
+    for (key in req.body)              // should return 2
+    {
+       if(req.body.hasOwnProperty(key))
+       {
+          count++;
+       }
+    }
+
+    var result_data = [];
+    //var k = 0;
     for(var key in req.body) {
         console.log("key: ");
         console.log(key);
-        console.log("k: ");
-        console.log(k);
+        //console.log("k: ");
+        //console.log(k);
         if(req.body.hasOwnProperty(key)) {
             item = req.body[key];
             console.log("Transactions received: ");
@@ -182,22 +192,20 @@ router.post('/sendTransaction', function(req, res, next) {
                 //var succ_data = data;
                 //data = JSON.stringify(data);
                 //result_data.push(data);
-                //result_data.push({"test": "test_value"});
-                var result_data = {"test": "test_value"};
+                result_data.push({"test": "test_value"});
+                //var result_data = {"test": "test_value"};
                 console.log("Result inside the loop: ");
                 console.log(result_data);
                 result_data = JSON.stringify(result_data);    
 
-                if (key == k) {
-                    console.log("Key = k ----- ");
+                if (key == count) {
+                    console.log("Key = count ----- ");
                     console.log(key);
-                    console.log(k);
                     res.json(result_data);
                 }         
 
             });
         }
-        k++;
     }
 /*    my_cc.invoke.init_transaction([id,userA,seller,amount,prev_trans_id,dateStr],function(err, data) {
         console.log('Returned data success', data);
