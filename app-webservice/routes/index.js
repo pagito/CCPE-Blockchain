@@ -165,9 +165,9 @@ router.post('/sendTransaction', function(req, res, next) {
        }
     }
 
-    var last = count -1;
+    var last = req.body.length;
 
-    var result_data = [{"test": "2323"}];
+    var result_data = [];
     var k = 0;
     for(var key in req.body) {
         console.log("key: ");
@@ -207,7 +207,7 @@ router.post('/sendTransaction', function(req, res, next) {
                 console.log(result_data);
                 result_data.push(succ_data);
 
-                if (key == last) {
+                if (result_data.length == last) {
                     console.log("###### Key = last ####### ");                    
                     console.log("key", key);
                     console.log("last", last);
