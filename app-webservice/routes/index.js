@@ -174,8 +174,7 @@ router.post('/sendTransaction', function(req, res, next) {
         console.log(key);
         console.log("k: ");
         console.log(k);
-        //result_data.push = [];
-        //if(req.body.hasOwnProperty(key)) {
+        if(req.body.hasOwnProperty(key)) {
             transaction = req.body[key];
             console.log("Transactions received: ");
             console.log(transaction);
@@ -217,66 +216,10 @@ router.post('/sendTransaction', function(req, res, next) {
                     result_data = JSON.stringify(result_data);
                     res.json(result_data);
                 }  
-
-                /*
-                var seconds = 20;
-                var waitTill = new Date(new Date().getTime() + seconds * 1000);
-                while(waitTill > new Date()) {
-                    if (key <= last) {
-                        result_data.push(succ_data.result);
-                    }
-                    //k++;
-                    //result_data.push({"test": "test_value"});
-                    //var result_data = {"test": "test_value"};
-                    console.log("Result inside the loop after pushing: ");
-                    console.log(result_data);
-                    result_data = JSON.stringify(result_data);    
-
-                    if (key == last) {
-                        console.log("###### Key = last ####### ");                    
-                        console.log("key", key);
-                        console.log("last", last);
-                        console.log("k", k);
-                        console.log("###########################")
-                        res.json(result_data);
-                    }         
-                    k++;
-                }
-                */
-
-
             });
-        //}
+        }
         
     }
-/*    my_cc.invoke.init_transaction([id,userA,seller,amount,prev_trans_id,dateStr],function(err, data) {
-        console.log('Returned data success', data);
-        //var succ_data = data;
-        //data = JSON.stringify(data);
-        //result_data.push(data);
-        //result_data.push({"test": "test_value"});
-        var result_data = {"test": "test_value"};
-        console.log("Result inside the loop: ");
-        console.log(result_data);
-        result_data = JSON.stringify(result_data);    
-
-        //if (key == k) {
-            res.json(result_data);
-        //}         
-
-    });*/
-
-/*    var dateStr = curret_date.getFullYear()+''+(curret_date.getMonth()+1)+''+curret_date.getDate();
-    my_cc.invoke.init_transaction(["222","userA","seller","300","333",dateStr],function(err, data) {
-        console.log('Returned data success', data);
-        //var succ_data = data;
-        //succ_data = JSON.stringify(succ_data);
-        //result_data.push(succ_data);
-        result_data.push({"test": "test_value"});
-        console.log("Final Result: ");
-        console.log(result_data);
-        res.json(result_data);            
-    });   */ 
     
 });
 
