@@ -197,6 +197,7 @@ router.post('/sendTransaction', function(req, res, next) {
 
             });
         }
+        k++;
     }
 /*    my_cc.invoke.init_transaction([id,userA,seller,amount,prev_trans_id,dateStr],function(err, data) {
         console.log('Returned data success', data);
