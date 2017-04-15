@@ -201,28 +201,34 @@ router.post('/sendTransaction', function(req, res, next) {
                 console.log('Returned data success', data);
                 var succ_data = data;
                 //data = JSON.stringify(data);
-                console.log("key is: ", key);
-                console.log("k is: ", k);
+                console.log("Inside the invoke key is: ", key);
+                console.log("Inside the invoke k is: ", k);
                 console.log('Lets push the json data into array -----------------------');
-                if (key <= last) {
-                    result_data.push(succ_data.result);
-                }
-                //k++;
-                //result_data.push({"test": "test_value"});
-                //var result_data = {"test": "test_value"};
-                console.log("Result inside the loop after pushing: ");
-                console.log(result_data);
-                result_data = JSON.stringify(result_data);    
 
-                if (key == last) {
-                    console.log("###### Key = last ####### ");                    
-                    console.log("key", key);
-                    console.log("last", last);
-                    console.log("k", k);
-                    console.log("###########################")
-                    res.json(result_data);
-                }         
-                k++;
+                var waitTill = new Date(new Date().getTime() + seconds * 20000);
+                while(waitTill > new Date()) {
+                    if (key <= last) {
+                        result_data.push(succ_data.result);
+                    }
+                    //k++;
+                    //result_data.push({"test": "test_value"});
+                    //var result_data = {"test": "test_value"};
+                    console.log("Result inside the loop after pushing: ");
+                    console.log(result_data);
+                    result_data = JSON.stringify(result_data);    
+
+                    if (key == last) {
+                        console.log("###### Key = last ####### ");                    
+                        console.log("key", key);
+                        console.log("last", last);
+                        console.log("k", k);
+                        console.log("###########################")
+                        res.json(result_data);
+                    }         
+                    k++;
+                }
+
+
             });
         //}
         
