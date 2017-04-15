@@ -205,6 +205,16 @@ router.post('/sendTransaction', function(req, res, next) {
                 console.log("Inside the invoke k is: ", k);
                 console.log('Lets push the json data into array -----------------------');
                 console.log(result_data);
+                result_data.push(succ_data);
+
+                if (key == last) {
+                    console.log("###### Key = last ####### ");                    
+                    console.log("key", key);
+                    console.log("last", last);
+                    console.log("k", k);
+                    console.log("###########################")
+                    res.json(result_data);
+                }  
 
                 /*
                 var seconds = 20;
