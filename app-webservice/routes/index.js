@@ -179,6 +179,7 @@ router.post('/sendTransaction', function(req, res, next) {
             transaction = req.body[key];
             console.log("Transactions received: ");
             console.log(transaction);
+            console.log("key after if: ", key);
 
             // Set values of json transaction
             var id = transaction.Transaction_id;
@@ -207,9 +208,10 @@ router.post('/sendTransaction', function(req, res, next) {
                 console.log(result_data);
                 result_data = JSON.stringify(result_data);    
 
-                if (key == last) {
+                if (key == count) {
                     console.log("Key = count ----- ");
-                    console.log(k);
+                    console.log("k", k);
+                    console.log("key", key);
                     res.json(result_data);
                 }         
                 k++;
