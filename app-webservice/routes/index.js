@@ -205,7 +205,8 @@ router.post('/sendTransaction', function(req, res, next) {
                 console.log("Inside the invoke k is: ", k);
                 console.log('Lets push the json data into array -----------------------');
 
-                var waitTill = new Date(new Date().getTime() + seconds * 20000);
+                var seconds = 1;
+                var waitTill = new Date(new Date().getTime() + seconds * 1000);
                 while(waitTill > new Date()) {
                     if (key <= last) {
                         result_data.push(succ_data.result);
