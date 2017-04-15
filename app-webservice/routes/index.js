@@ -206,6 +206,7 @@ router.post('/sendTransaction', function(req, res, next) {
                 console.log('Lets push the json data into array -----------------------');
                 console.log(result_data);
                 result_data.push(succ_data);
+                result_data = JSON.stringify(result_data);
 
                 if (result_data.length == last) {
                     console.log("###### Key = last ####### ");                    
