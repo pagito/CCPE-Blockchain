@@ -158,9 +158,13 @@ router.post('/sendTransaction', function(req, res, next) {
     //var result_data = [];
     var k = 0;
     for(var key in req.body) {
+        console.log("key: ");
         console.log(key);
+        console.log("k: ");
+        console.log(k);
         if(req.body.hasOwnProperty(key)) {
             item = req.body[key];
+            console.log("Transactions received: ");
             console.log(item);
 
             var id = item.Transaction_id;
@@ -185,13 +189,16 @@ router.post('/sendTransaction', function(req, res, next) {
                 result_data = JSON.stringify(result_data);    
 
                 if (key == k) {
-                    //res.json(result_data);
+                    console.log("Key = k ----- ");
+                    console.log(key);
+                    console.log(k);
+                    res.json(result_data);
                 }         
 
             });
         }
     }
-    my_cc.invoke.init_transaction([id,userA,seller,amount,prev_trans_id,dateStr],function(err, data) {
+/*    my_cc.invoke.init_transaction([id,userA,seller,amount,prev_trans_id,dateStr],function(err, data) {
         console.log('Returned data success', data);
         //var succ_data = data;
         //data = JSON.stringify(data);
@@ -206,7 +213,7 @@ router.post('/sendTransaction', function(req, res, next) {
             res.json(result_data);
         //}         
 
-    });
+    });*/
 
 /*    var dateStr = curret_date.getFullYear()+''+(curret_date.getMonth()+1)+''+curret_date.getDate();
     my_cc.invoke.init_transaction(["222","userA","seller","300","333",dateStr],function(err, data) {
