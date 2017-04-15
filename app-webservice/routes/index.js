@@ -165,13 +165,15 @@ router.post('/sendTransaction', function(req, res, next) {
        }
     }
 
+    var last = count -1;
+
     var result_data = [];
-    //var k = 0;
+    var k = 0;
     for(var key in req.body) {
         console.log("key: ");
         console.log(key);
-        //console.log("k: ");
-        //console.log(k);
+        console.log("k: ");
+        console.log(k);
         if(req.body.hasOwnProperty(key)) {
             item = req.body[key];
             console.log("Transactions received: ");
@@ -192,7 +194,9 @@ router.post('/sendTransaction', function(req, res, next) {
                 var succ_data = data;
                 //data = JSON.stringify(data);
                 console.log("key is: ", key);
+                console.log("k is: ", k);
                 console.log('Lets push the json data into array -----------------------');
+                //if (key)
                 result_data.push(succ_data.result);
                 //result_data.push({"test": "test_value"});
                 //var result_data = {"test": "test_value"};
@@ -200,14 +204,15 @@ router.post('/sendTransaction', function(req, res, next) {
                 console.log(result_data);
                 result_data = JSON.stringify(result_data);    
 
-                if (key == count) {
+                if (k == last) {
                     console.log("Key = count ----- ");
-                    console.log(key);
+                    console.log(k);
                     res.json(result_data);
                 }         
 
             });
         }
+        k++;
     }
 /*    my_cc.invoke.init_transaction([id,userA,seller,amount,prev_trans_id,dateStr],function(err, data) {
         console.log('Returned data success', data);
