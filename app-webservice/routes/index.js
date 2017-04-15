@@ -174,17 +174,19 @@ router.post('/sendTransaction', function(req, res, next) {
         console.log(key);
         console.log("k: ");
         console.log(k);
+        //result_data.push = [];
         if(req.body.hasOwnProperty(key)) {
-            item = req.body[key];
+            transaction = req.body[key];
             console.log("Transactions received: ");
-            console.log(item);
+            console.log(transaction);
 
-            var id = item.Transaction_id;
-            var userA = item.User_A;
+            // Set values of json transaction
+            var id = transaction.Transaction_id;
+            var userA = transaction.User_A;
             //var userB = item.User_B;
-            var seller = item.Seller; 
-            var amount = item.Ex_points;
-            var prev_trans_id = item.Prev_Transaction_ID;
+            var seller = transaction.Seller; 
+            var amount = transaction.Ex_points;
+            var prev_trans_id = transaction.Prev_Transaction_ID;
 
             var curret_date = new Date();
             var dateStr = curret_date.getFullYear()+''+(curret_date.getMonth()+1)+''+curret_date.getDate();
@@ -198,21 +200,22 @@ router.post('/sendTransaction', function(req, res, next) {
                 console.log('Lets push the json data into array -----------------------');
                 //if (key)
                 result_data.push(succ_data.result);
+                //k++;
                 //result_data.push({"test": "test_value"});
                 //var result_data = {"test": "test_value"};
                 console.log("Result inside the loop after pushing: ");
                 console.log(result_data);
                 result_data = JSON.stringify(result_data);    
 
-                if (k == last) {
+                if (key == last) {
                     console.log("Key = count ----- ");
                     console.log(k);
                     res.json(result_data);
                 }         
-
+                k++;
             });
         }
-        k++;
+        
     }
 /*    my_cc.invoke.init_transaction([id,userA,seller,amount,prev_trans_id,dateStr],function(err, data) {
         console.log('Returned data success', data);
