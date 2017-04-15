@@ -167,7 +167,7 @@ router.post('/sendTransaction', function(req, res, next) {
 
     var last = count -1;
 
-    var result_data = [];
+    var result_data = [{"test": "2323"}];
     var k = 0;
     for(var key in req.body) {
         console.log("key: ");
@@ -204,7 +204,9 @@ router.post('/sendTransaction', function(req, res, next) {
                 console.log("Inside the invoke key is: ", key);
                 console.log("Inside the invoke k is: ", k);
                 console.log('Lets push the json data into array -----------------------');
+                console.log(result_data);
 
+                /*
                 var seconds = 20;
                 var waitTill = new Date(new Date().getTime() + seconds * 1000);
                 while(waitTill > new Date()) {
@@ -228,6 +230,7 @@ router.post('/sendTransaction', function(req, res, next) {
                     }         
                     k++;
                 }
+                */
 
 
             });
