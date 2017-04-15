@@ -175,7 +175,7 @@ router.post('/sendTransaction', function(req, res, next) {
         console.log("k: ");
         console.log(k);
         //result_data.push = [];
-        if(req.body.hasOwnProperty(key)) {
+        //if(req.body.hasOwnProperty(key)) {
             transaction = req.body[key];
             console.log("Transactions received: ");
             console.log(transaction);
@@ -191,7 +191,7 @@ router.post('/sendTransaction', function(req, res, next) {
 
             var curret_date = new Date();
             var dateStr = curret_date.getFullYear()+''+(curret_date.getMonth()+1)+''+curret_date.getDate();
-            
+
             console.log("Console all data: ###################### ");
             console.log("##########################################");
             console.log("id: " + id + " userA: " + userA + " seller: " + seller + " amount: " + amount + " prev_trans_id: " + prev_trans_id)
@@ -215,14 +215,16 @@ router.post('/sendTransaction', function(req, res, next) {
                 result_data = JSON.stringify(result_data);    
 
                 if (key == last) {
-                    console.log("Key = count ----- ");
-                    console.log("k", k);
+                    console.log("###### Key = last ####### ");                    
                     console.log("key", key);
+                    console.log("last", last);
+                    console.log("k", k);
+                    console.log("###########################")
                     res.json(result_data);
                 }         
                 k++;
             });
-        }
+        //}
         
     }
 /*    my_cc.invoke.init_transaction([id,userA,seller,amount,prev_trans_id,dateStr],function(err, data) {
