@@ -189,11 +189,11 @@ router.post('/sendTransaction', function(req, res, next) {
 
             my_cc.invoke.init_transaction([id,userA,seller,amount,prev_trans_id,dateStr],function(err, data) {
                 console.log('Returned data success', data);
-                //var succ_data = data;
+                var succ_data = data;
                 //data = JSON.stringify(data);
                 console.log("key is: ", key);
                 console.log('Lets push the json data into array -----------------------');
-                result_data.push(data);
+                result_data.push(succ_data.result);
                 //result_data.push({"test": "test_value"});
                 //var result_data = {"test": "test_value"};
                 console.log("Result inside the loop after pushing: ");
