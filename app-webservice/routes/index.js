@@ -199,8 +199,9 @@ router.post('/sendTransaction', function(req, res, next) {
                 console.log("key is: ", key);
                 console.log("k is: ", k);
                 console.log('Lets push the json data into array -----------------------');
-                //if (key)
-                result_data.push(succ_data.result);
+                if (key < last) {
+                    result_data.push(succ_data.result);
+                }
                 //k++;
                 //result_data.push({"test": "test_value"});
                 //var result_data = {"test": "test_value"};
@@ -208,7 +209,7 @@ router.post('/sendTransaction', function(req, res, next) {
                 console.log(result_data);
                 result_data = JSON.stringify(result_data);    
 
-                if (key == count) {
+                if (key == last) {
                     console.log("Key = count ----- ");
                     console.log("k", k);
                     console.log("key", key);
