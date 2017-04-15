@@ -191,6 +191,11 @@ router.post('/sendTransaction', function(req, res, next) {
 
             var curret_date = new Date();
             var dateStr = curret_date.getFullYear()+''+(curret_date.getMonth()+1)+''+curret_date.getDate();
+            
+            console.log("Console all data: ###################### ");
+            console.log("##########################################");
+            console.log("id: " + id + " userA: " + userA + " seller: " + seller + " amount: " + amount + " prev_trans_id: " + prev_trans_id)
+            console.log("##########################################");
 
             my_cc.invoke.init_transaction([id,userA,seller,amount,prev_trans_id,dateStr],function(err, data) {
                 console.log('Returned data success', data);
@@ -199,7 +204,7 @@ router.post('/sendTransaction', function(req, res, next) {
                 console.log("key is: ", key);
                 console.log("k is: ", k);
                 console.log('Lets push the json data into array -----------------------');
-                if (key < last) {
+                if (key <= last) {
                     result_data.push(succ_data.result);
                 }
                 //k++;
