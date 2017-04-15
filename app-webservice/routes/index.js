@@ -191,10 +191,12 @@ router.post('/sendTransaction', function(req, res, next) {
                 console.log('Returned data success', data);
                 //var succ_data = data;
                 //data = JSON.stringify(data);
-                //result_data.push(data);
-                result_data.push({"test": "test_value"});
+                console.log("key is: ", key);
+                console.log('Lets push the json data into array -----------------------');
+                result_data.push(data);
+                //result_data.push({"test": "test_value"});
                 //var result_data = {"test": "test_value"};
-                console.log("Result inside the loop: ");
+                console.log("Result inside the loop after pushing: ");
                 console.log(result_data);
                 result_data = JSON.stringify(result_data);    
 
