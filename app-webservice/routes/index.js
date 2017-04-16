@@ -183,7 +183,7 @@ router.post('/sendTransaction', function(req, res, next) {
             // Set values of json transaction
             var id = transaction.Transaction_id;
             var userA = transaction.User_A;
-            //var userB = item.User_B;
+            var userB = item.User_B;
             var seller = transaction.Seller; 
             var amount = transaction.Ex_points;
             var prev_trans_id = transaction.Prev_Transaction_ID;
@@ -193,10 +193,10 @@ router.post('/sendTransaction', function(req, res, next) {
 
             console.log("Console all data: ###################### ");
             console.log("##########################################");
-            console.log("id: " + id + " userA: " + userA + " seller: " + seller + " amount: " + amount + " prev_trans_id: " + prev_trans_id)
+            console.log("id: " + id + " userA: " + userA + " userB: " + userB + " seller: " + seller + " amount: " + amount + " prev_trans_id: " + prev_trans_id)
             console.log("##########################################");
 
-            my_cc.invoke.init_transaction([id,userA,seller,amount,prev_trans_id,dateStr],function(err, data) {
+            my_cc.invoke.init_transaction([id,userA,userB,seller,amount,prev_trans_id,dateStr],function(err, data) {
                 console.log('Returned data success', data);
                 var succ_data = data;
                 //data = JSON.stringify(data);
