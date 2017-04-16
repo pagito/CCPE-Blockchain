@@ -183,7 +183,7 @@ router.post('/sendTransaction', function(req, res, next) {
             // Set values of json transaction
             var id = transaction.Transaction_id;
             var userA = transaction.User_A;
-            var userB = item.User_B;
+            var userB = transaction.User_B;
             var seller = transaction.Seller; 
             var amount = transaction.Ex_points;
             var prev_trans_id = transaction.Prev_Transaction_ID;
