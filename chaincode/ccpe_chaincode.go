@@ -46,7 +46,7 @@ type Transaction struct{
 	Id string `json:"txID"`					        //Transaction ID from cppe system
 	Timestamp string `json:"EX_TIME"`		        //utc timestamp of creation
 	TraderA string  `json:"USER_A_ID"`		        //UserA ID
-	//TraderB string  `json:"USER_B_ID"`            //UserB ID
+	TraderB string  `json:"USER_B_ID"`            //UserB ID
 	Seller string  `json:"SELLER_ID"`	            //UserA's Seller ID
 	Point_Amount string  `json:"POINT_AMOUNT"`                 //Points owned by UserA after exchange
 	Prev_Transaction_id string `json:"PREV_TR_ID"`
@@ -351,11 +351,11 @@ func (t *SimpleChaincode) init_transaction(stub shim.ChaincodeStubInterface, arg
 	completed := Transaction{}
 	completed.Id = args[0]	
 	completed.TraderA = args[1]
-	//completed.TraderB = args[2]
-	completed.Seller = args[2]
-	completed.Point_Amount = args[3]
-	completed.Prev_Transaction_id = args[4]
-	completed.Timestamp = args[5]
+	completed.TraderB = args[2]
+	completed.Seller = args[3]
+	completed.Point_Amount = args[4]
+	completed.Prev_Transaction_id = args[5]
+	completed.Timestamp = args[6]
 	
 	fmt.Println("- start completed trade")
 	jsonAsBytes, _ := json.Marshal(completed)

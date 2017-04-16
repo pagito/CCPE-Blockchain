@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"len",
+				"length"
+			],
+			[
 				"succ",
 				"succ_data"
 			],
@@ -313,7 +317,7 @@
 			"file": "app-webservice/routes/index.js",
 			"settings":
 			{
-				"buffer_size": 11959,
+				"buffer_size": 12581,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -724,15 +728,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 11959,
+						"buffer_size": 12581,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6639,
-								6639
+								5963,
+								5963
 							]
 						],
 						"settings":
@@ -745,7 +749,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 3829.0,
+						"translation.y": 4738.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
