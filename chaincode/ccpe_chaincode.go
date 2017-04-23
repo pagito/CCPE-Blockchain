@@ -43,7 +43,7 @@ type Point struct{
 }
 
 type Transaction struct{
-	Id string `json:"txID"`					        //Transaction ID from cppe system
+	Id string `json:"ORD_ID"`					        //Transaction ID from cppe system
 	Timestamp string `json:"EX_TIME"`		        //utc timestamp of creation
 	TraderA string  `json:"USER_A_ID"`		        //UserA ID
 	TraderB string  `json:"USER_B_ID"`            //UserB ID

@@ -181,7 +181,7 @@ router.post('/sendTransaction', function(req, res, next) {
             console.log("key after if: ", key);
 
             // Set values of json transaction
-            var id = transaction.Transaction_id;
+            var id = transaction.Order_id;
             var userA = transaction.User_A;
             var userB = transaction.User_B;
             var seller = transaction.Seller; 
