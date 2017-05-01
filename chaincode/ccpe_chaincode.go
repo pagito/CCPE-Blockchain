@@ -50,6 +50,7 @@ type Transaction struct{
 	Seller string  `json:"SELLER_ID"`	            //UserA's Seller ID
 	Point_Amount string  `json:"POINT_AMOUNT"`                 //Points owned by UserA after exchange
 	Prev_Transaction_id string `json:"PREV_TR_ID"`
+	Expiration_Date string `json:"EXP_DATE"`
 }
 
 
@@ -356,6 +357,7 @@ func (t *SimpleChaincode) init_transaction(stub shim.ChaincodeStubInterface, arg
 	completed.Point_Amount = args[4]
 	completed.Prev_Transaction_id = args[5]
 	completed.Timestamp = args[6]
+	completed.Expiration_Date = args[7]
 	
 	fmt.Println("- start completed trade")
 	jsonAsBytes, _ := json.Marshal(completed)

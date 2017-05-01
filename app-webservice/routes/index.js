@@ -187,6 +187,9 @@ router.post('/sendTransaction', function(req, res, next) {
             var seller = transaction.Seller; 
             var amount = transaction.Ex_points;
             var prev_trans_id = transaction.Prev_Transaction_ID;
+            var exp_date = transaction.Exp_date;
+
+            var exp_dateStr = exp_date.getFullYear()+''+(exp_date.getMonth()+1)+''+exp_date.getDate();
 
             var curret_date = new Date();
             var dateStr = curret_date.getFullYear()+''+(curret_date.getMonth()+1)+''+curret_date.getDate();
@@ -196,7 +199,7 @@ router.post('/sendTransaction', function(req, res, next) {
             console.log("id: " + id + " userA: " + userA + " userB: " + userB + " seller: " + seller + " amount: " + amount + " prev_trans_id: " + prev_trans_id)
             console.log("##########################################");
 
-            my_cc.invoke.init_transaction([id,userA,userB,seller,amount,prev_trans_id,dateStr],function(err, data) {
+            my_cc.invoke.init_transaction([id,userA,userB,seller,amount,prev_trans_id,dateStr, exp_dateStr],function(err, data) {
                 console.log('Returned data success', data);
                 var succ_data = data;
                 //data = JSON.stringify(data);
