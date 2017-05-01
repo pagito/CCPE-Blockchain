@@ -155,6 +155,8 @@ router.post('/savePoint', function(req, res){
 router.post('/sendTransaction', function(req, res, next) {
     console.log("savedata called: " + req.body + " ----------saveTransaction-------------- ");
     
+
+
     
     var count = 0;
     for (key in req.body)              // should return 2
@@ -189,6 +191,7 @@ router.post('/sendTransaction', function(req, res, next) {
             var prev_trans_id = transaction.Prev_Transaction_ID;
             var exp_date = transaction.Exp_date;
 
+            var exp_date = new Date(exp_date);
             var exp_dateStr = exp_date.getFullYear()+''+(exp_date.getMonth()+1)+''+exp_date.getDate();
 
             var curret_date = new Date();
@@ -196,7 +199,7 @@ router.post('/sendTransaction', function(req, res, next) {
 
             console.log("Console all data: ###################### ");
             console.log("##########################################");
-            console.log("id: " + id + " userA: " + userA + " userB: " + userB + " seller: " + seller + " amount: " + amount + " prev_trans_id: " + prev_trans_id)
+            console.log("id: " + id + " userA: " + userA + " userB: " + userB + " seller: " + seller + " amount: " + amount + " prev_trans_id: " + prev_trans_id + " dateStr: " + dateStr + " exp_dateStr: " + exp_dateStr)
             console.log("##########################################");
 
             my_cc.invoke.init_transaction([id,userA,userB,seller,amount,prev_trans_id,dateStr, exp_dateStr],function(err, data) {
